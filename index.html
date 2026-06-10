@@ -506,12 +506,11 @@ let state = {
 // ═══════════════════════════════════════════════════════
 async function api(action, data = {}) {
   try {
-    const body = JSON.stringify({ action, ...data,
-      userRole: state.user?.role, userLabel: state.user?.label });
-    const res = await fetch(API_URL, {
-      method: "POST",
-      body,
-      headers: { "Content-Type": "application/json" }
+    const payload = { action, ...data,
+      userRole: state.user?.role, userLabel: state.user?.label };
+    const params = new URLSearchParams({ data: JSON.stringify(payload) });
+    const res = await fetch(API_URL + "?" + params.toString(), {
+      method: "GET",
     });
     return await res.json();
   } catch (err) {
