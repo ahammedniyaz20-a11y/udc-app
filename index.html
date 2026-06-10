@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UDC — Udyawar Dammam Committee</title>
+<style>
+/* ── Reset & Base ─────────────────────────────────────── */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --slate:#2C3E50;--slate2:#34495E;--teal:#1ABC9C;--teal2:#16A085;
+  --lteal:#D1F2EB;--cream:#FAFAF8;--alt:#F0F4F8;--gold:#F39C12;
+  --lgold:#FEF9E7;--red:#E74C3C;--lred:#FDEDEC;--grn:#27AE60;
+  --lgrn:#D5F5E3;--bdr:#D5D8DC;--wht:#FFFFFF;--lgry:#ECF0F1;
+  --gry2:#BDC3C7;--inp:#EBF5FB;--text:#2C3E50;--text2:#7F8C8D;
+  --bg:#F5F6FA;--surface:#FFFFFF;--border:#E8ECEF;
+  --radius:8px;--radius-lg:12px;
+  --shadow:0 1px 3px rgba(0,0,0,0.08);
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+
+/* ── Utilities ────────────────────────────────────────── */
+.hidden{display:none!important}
+.flex{display:flex}
+.items-center{align-items:center}
+.justify-between{justify-content:space-between}
+.gap-8{gap:8px}.gap-12{gap:12px}.gap-16{gap:16px}
+.mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}
+.mb-16{margin-bottom:16px}
+.text-sm{font-size:12px}.text-xs{font-size:11px}
+.text-muted{color:var(--text2)}
+.text-teal{color:var(--teal2)}.text-red{color:var(--red)}
+.text-grn{color:var(--grn)}.text-gold{color:var(--gold)}
+.fw-500{font-weight:500}
+.w-full{width:100%}
+.text-center{text-align:center}
+.text-right{text-align:right}
+
+/* ── App Shell ────────────────────────────────────────── */
+#app{display:none}
+.app-layout{display:flex;height:100vh;overflow:hidden}
+
+/* ── Sidebar ──────────────────────────────────────────── */
+.sidebar{
+  width:220px;background:var(--slate);display:flex;
+  flex-direction:column;flex-shrink:0;overflow-y:auto
+}
+.sidebar-brand{
+  padding:20px 16px 16px;border-bottom:1px solid rgba(255,255,255,0.08)
+}
+.brand-short{
+  font-size:22px;font-weight:700;color:#fff;letter-spacing:0.5px
+}
+.brand-full{
+  font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px;line-height:1.3
+}
+.nav-section{
+  padding:16px 16px 4px;font-size:10px;color:rgba(255,255,255,0.3);
+  text-transform:uppercase;letter-spacing:0.1em
+}
+.nav-item{
+  display:flex;align-items:center;gap:10px;padding:10px 16px;
+  color:rgba(255,255,255,0.6);cursor:pointer;font-size:13px;
+  border-left:3px solid transparent;transition:all 0.15s;user-select:none
+}
+.nav-item:hover{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.9)}
+.nav-item.active{
+  background:rgba(26,188,156,0.15);color:#fff;
+  border-left:3px solid var(--teal)
+}
+.nav-icon{font-size:18px;width:20px;text-align:center}
+.sidebar-footer{
+  margin-top:auto;padding:14px 16px;
+  border-top:1px solid rgba(255,255,255,0.08)
+}
+.user-pill{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.07);border-radius:var(--radius);
+  padding:8px 10px;cursor:pointer
+}
+.user-pill:hover{background:rgba(255,255,255,0.12)}
+.user-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--teal);flex-shrink:0
+}
+.user-info{flex:1;min-width:0}
+.user-role{font-size:12px;font-weight:500;color:#fff;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.user-name{font-size:10px;color:rgba(255,255,255,0.4)}
+.logout-btn{font-size:11px;color:rgba(255,255,255,0.4);padding:2px}
+
+/* ── Main Content ─────────────────────────────────────── */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.topbar{
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:0 24px;height:56px;display:flex;align-items:center;
+  justify-content:space-between;flex-shrink:0
+}
+.topbar-title{font-size:16px;font-weight:600;color:var(--slate)}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.page-content{flex:1;overflow-y:auto;padding:24px}
+
+/* ── Cards ────────────────────────────────────────────── */
+.card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:20px;margin-bottom:16px
+}
+.card-sm{padding:14px 16px}
+.card-title{
+  font-size:13px;font-weight:600;color:var(--slate);
+  margin-bottom:16px;display:flex;align-items:center;gap:8px
+}
+.card-title-icon{font-size:16px}
+
+/* ── KPI Grid ─────────────────────────────────────────── */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.kpi{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:16px
+}
+.kpi-label{
+  font-size:11px;font-weight:500;color:var(--text2);
+  text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px
+}
+.kpi-value{font-size:26px;font-weight:600;line-height:1}
+.kpi-sub{font-size:11px;color:var(--text2);margin-top:5px}
+.kpi-accent{height:3px;border-radius:2px;margin-top:12px}
+
+/* ── Pills / Badges ───────────────────────────────────── */
+.pill{
+  display:inline-flex;align-items:center;
+  font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px
+}
+.pill-grn{background:var(--lgrn);color:var(--grn)}
+.pill-red{background:var(--lred);color:var(--red)}
+.pill-gold{background:var(--lgold);color:var(--gold)}
+.pill-teal{background:var(--lteal);color:var(--teal2)}
+.pill-gray{background:var(--lgry);color:var(--text2)}
+
+/* ── Tables ───────────────────────────────────────────── */
+.table-wrap{overflow-x:auto;border-radius:var(--radius-lg);border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{
+  text-align:left;padding:10px 14px;font-size:11px;font-weight:600;
+  color:var(--text2);background:var(--alt);
+  border-bottom:1px solid var(--border);white-space:nowrap
+}
+td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:#F8FAFB}
+
+/* ── Forms ────────────────────────────────────────────── */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.form-full{grid-column:1/-1}
+.form-group{display:flex;flex-direction:column;gap:5px}
+label{font-size:12px;font-weight:500;color:var(--text2)}
+input,select,textarea{
+  font-size:13px;padding:9px 12px;border-radius:var(--radius);
+  border:1px solid var(--border);background:var(--surface);
+  color:var(--text);width:100%;transition:border-color 0.15s
+}
+input:focus,select:focus,textarea:focus{
+  outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(26,188,156,0.1)
+}
+input.inp-highlight{background:var(--inp);border-color:#B3D9F0}
+.required-star{color:var(--red)}
+
+/* ── Buttons ──────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:7px;padding:9px 18px;border-radius:var(--radius);font-size:13px;
+  font-weight:500;cursor:pointer;border:1px solid var(--border);
+  background:var(--surface);color:var(--text);transition:all 0.15s;
+  white-space:nowrap
+}
+.btn:hover{background:var(--alt);border-color:var(--gry2)}
+.btn:active{transform:scale(0.98)}
+.btn-primary{background:var(--teal2);color:#fff;border-color:var(--teal2)}
+.btn-primary:hover{background:var(--teal);border-color:var(--teal)}
+.btn-danger{background:var(--red);color:#fff;border-color:var(--red)}
+.btn-danger:hover{background:#C0392B;border-color:#C0392B}
+.btn-sm{padding:6px 12px;font-size:12px}
+.btn-icon{padding:7px;border-radius:var(--radius)}
+
+/* ── Search bar ───────────────────────────────────────── */
+.search-wrap{
+  display:flex;align-items:center;gap:10px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:9px 14px;margin-bottom:16px
+}
+.search-wrap input{border:none;background:transparent;padding:0;font-size:13px;flex:1}
+.search-wrap input:focus{outline:none;box-shadow:none}
+.search-icon{color:var(--text2);font-size:16px}
+
+/* ── Month grid ───────────────────────────────────────── */
+.month-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.month-cell{text-align:center;padding:8px 4px;border-radius:var(--radius);
+  font-size:12px;font-weight:500;border:1px solid transparent}
+.mc-paid{background:var(--lgrn);color:var(--grn);border-color:#C0DD97}
+.mc-unpaid{background:var(--lred);color:var(--red);border-color:#F7C1C1}
+.mc-na{background:var(--lgry);color:var(--text2)}
+.mc-label{font-size:10px;color:var(--text2);text-align:center;margin-top:3px}
+
+/* ── Toast ────────────────────────────────────────────── */
+#toast{
+  position:fixed;bottom:24px;right:24px;
+  background:var(--slate);color:#fff;padding:12px 20px;
+  border-radius:var(--radius);font-size:13px;font-weight:500;
+  box-shadow:0 4px 20px rgba(0,0,0,0.2);z-index:9999;
+  transform:translateY(80px);opacity:0;transition:all 0.25s;pointer-events:none
+}
+#toast.show{transform:translateY(0);opacity:1}
+#toast.toast-ok{background:var(--grn)}
+#toast.toast-err{background:var(--red)}
+
+/* ── Modal ────────────────────────────────────────────── */
+.modal-backdrop{
+  position:fixed;inset:0;background:rgba(0,0,0,0.4);
+  z-index:1000;display:flex;align-items:center;justify-content:center
+}
+.modal{
+  background:var(--surface);border-radius:var(--radius-lg);
+  width:90%;max-width:560px;max-height:90vh;overflow-y:auto;
+  box-shadow:0 20px 60px rgba(0,0,0,0.2)
+}
+.modal-header{
+  padding:20px 24px 0;display:flex;align-items:center;
+  justify-content:space-between
+}
+.modal-title{font-size:16px;font-weight:600}
+.modal-close{
+  font-size:20px;cursor:pointer;color:var(--text2);
+  background:none;border:none;line-height:1;padding:4px
+}
+.modal-body{padding:20px 24px}
+.modal-footer{
+  padding:0 24px 20px;display:flex;justify-content:flex-end;gap:10px
+}
+
+/* ── Login Screen ─────────────────────────────────────── */
+#login-screen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#2C3E50 0%,#34495E 100%)
+}
+.login-card{
+  background:#fff;border-radius:16px;padding:40px;width:100%;max-width:380px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.3)
+}
+.login-logo{text-align:center;margin-bottom:28px}
+.login-logo-circle{
+  width:64px;height:64px;background:var(--teal2);border-radius:16px;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:24px;font-weight:700;color:#fff;margin-bottom:12px
+}
+.login-org{font-size:18px;font-weight:700;color:var(--slate)}
+.login-sub{font-size:12px;color:var(--text2);margin-top:3px}
+.pin-input{
+  text-align:center;font-size:28px;letter-spacing:8px;font-weight:600;
+  border:2px solid var(--border);border-radius:var(--radius);
+  padding:14px;color:var(--slate);background:var(--alt)
+}
+.pin-input:focus{border-color:var(--teal);background:#fff}
+.login-hint{font-size:11px;color:var(--text2);text-align:center;margin-top:8px}
+.login-error{
+  background:var(--lred);color:var(--red);border-radius:var(--radius);
+  padding:10px 14px;font-size:13px;margin-top:12px;text-align:center
+}
+
+/* ── Offline banner ───────────────────────────────────── */
+#offline-banner{
+  background:var(--red);color:#fff;text-align:center;
+  padding:8px;font-size:12px;font-weight:500;display:none
+}
+
+/* ── Loading spinner ──────────────────────────────────── */
+.spinner{
+  width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);
+  border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;
+  display:inline-block
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.page-loader{
+  display:flex;align-items:center;justify-content:center;
+  padding:60px;flex-direction:column;gap:14px;color:var(--text2);font-size:13px
+}
+.page-loader .spinner{border-color:rgba(44,62,80,0.15);border-top-color:var(--teal2)}
+
+/* ── Receipt modal ────────────────────────────────────── */
+.receipt-box{
+  background:var(--lgry);border-radius:var(--radius);
+  padding:16px;font-size:13px;line-height:1.9;
+  font-family:'Courier New',monospace;white-space:pre-wrap;
+  max-height:300px;overflow-y:auto;color:var(--slate)
+}
+
+/* ── Charts ───────────────────────────────────────────── */
+.bar-chart{display:flex;align-items:flex-end;gap:6px;height:80px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bar{border-radius:3px 3px 0 0;width:100%;background:var(--lteal);
+  transition:height 0.3s,background 0.2s;cursor:default}
+.bar:hover{background:var(--teal)}
+.bar-lbl{font-size:9px;color:var(--text2)}
+
+/* ── Payment history ──────────────────────────────────── */
+.history-item{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 0;border-bottom:1px solid var(--border)
+}
+.history-item:last-child{border-bottom:none}
+.history-icon{
+  width:34px;height:34px;border-radius:var(--radius);
+  display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0
+}
+.hi-fee{background:var(--lteal)}
+.hi-don{background:var(--lgold)}
+.history-info{flex:1;min-width:0}
+.history-receipt{font-size:12px;font-weight:600;color:var(--slate)}
+.history-detail{font-size:11px;color:var(--text2);margin-top:1px}
+.history-amount{font-size:14px;font-weight:600}
+
+/* ── Section header ───────────────────────────────────── */
+.section-hdr{
+  font-size:11px;font-weight:600;color:var(--text2);
+  text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px
+}
+.divider{height:1px;background:var(--border);margin:16px 0}
+
+/* ── Profile header ───────────────────────────────────── */
+.profile-hdr{
+  display:flex;align-items:center;gap:14px;
+  padding:16px;background:var(--alt);border-radius:var(--radius-lg);
+  margin-bottom:16px
+}
+.avatar{
+  width:48px;height:48px;border-radius:50%;background:var(--lteal);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:700;color:var(--teal2);flex-shrink:0
+}
+.profile-name{font-size:16px;font-weight:600}
+.profile-meta{font-size:12px;color:var(--text2);margin-top:2px}
+
+/* ── Fin cards ────────────────────────────────────────── */
+.fin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.fin-card{
+  background:var(--alt);border-radius:var(--radius);padding:12px 14px
+}
+.fin-label{font-size:11px;color:var(--text2);margin-bottom:4px;font-weight:500}
+.fin-value{font-size:18px;font-weight:600}
+
+/* ── Empty state ──────────────────────────────────────── */
+.empty{
+  text-align:center;padding:40px 20px;color:var(--text2);font-size:13px
+}
+.empty-icon{font-size:32px;margin-bottom:8px}
+
+/* ── Timer badge ──────────────────────────────────────── */
+.timer-badge{
+  font-size:10px;padding:2px 7px;border-radius:20px;
+  background:var(--lgold);color:var(--gold);font-weight:500
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media(max-width:900px){
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .fin-grid{grid-template-columns:repeat(2,1fr)}
+  .form-grid{grid-template-columns:1fr}
+  .form-grid-3{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .sidebar{width:64px}
+  .brand-full,.nav-label,.user-info,.logout-btn,.nav-section{display:none}
+  .sidebar-brand{padding:14px}
+  .brand-short{font-size:14px}
+  .nav-item{justify-content:center;padding:12px 8px}
+  .nav-icon{width:auto}
+  .page-content{padding:16px}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="offline-banner">⚠️ No internet connection — changes will not be saved until connection is restored</div>
+
+<!-- ═══════════════ LOGIN ═══════════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-logo-circle">UDC</div>
+      <div class="login-org">Udyawar Dammam Committee</div>
+      <div class="login-sub">Membership Management System</div>
+    </div>
+    <div class="form-group">
+      <label>Enter Your PIN</label>
+      <input type="password" inputmode="numeric" maxlength="6" id="pin-input"
+        class="pin-input" placeholder="••••" autocomplete="off"
+        onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <div class="login-hint">Contact your admin if you forgot your PIN</div>
+    <div id="login-error" class="login-error hidden"></div>
+    <button class="btn btn-primary w-full mt-16" onclick="doLogin()" id="login-btn">
+      Sign In
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════ APP ═══════════════ -->
+<div id="app">
+  <div class="app-layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-short">UDC</div>
+        <div class="brand-full">Udyawar Dammam<br>Committee</div>
+      </div>
+
+      <div class="nav-section">Main</div>
+      <div class="nav-item active" data-page="dashboard" onclick="navigate('dashboard',this)">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">Dashboard</span>
+      </div>
+
+      <div class="nav-item" data-page="members" id="nav-members" onclick="navigate('members',this)">
+        <span class="nav-icon">👥</span>
+        <span class="nav-label">Members</span>
+      </div>
+
+      <div class="nav-item" data-page="payment" id="nav-payment" onclick="navigate('payment',this)">
+        <span class="nav-icon">💳</span>
+        <span class="nav-label">Payment Entry</span>
+      </div>
+
+      <div class="nav-section">Reports</div>
+      <div class="nav-item" data-page="search" onclick="navigate('search',this)">
+        <span class="nav-icon">🔍</span>
+        <span class="nav-label">Member Search</span>
+      </div>
+
+      <div class="nav-item" data-page="monthly" onclick="navigate('monthly',this)">
+        <span class="nav-icon">📅</span>
+        <span class="nav-label">Monthly Report</span>
+      </div>
+
+      <div class="nav-section" id="nav-sys-section">System</div>
+      <div class="nav-item hidden" data-page="audit" id="nav-audit" onclick="navigate('audit',this)">
+        <span class="nav-icon">📋</span>
+        <span class="nav-label">Audit Log</span>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-pill" onclick="confirmLogout()">
+          <div class="user-dot"></div>
+          <div class="user-info">
+            <div class="user-role" id="sidebar-role">Admin</div>
+            <div class="user-name">Click to logout</div>
+          </div>
+          <div class="logout-btn">⏻</div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main -->
+    <div class="main">
+      <div class="topbar">
+        <div class="topbar-title" id="topbar-title">Dashboard</div>
+        <div class="topbar-right" id="topbar-right"></div>
+      </div>
+      <div class="page-content" id="page-content">
+        <div class="page-loader"><div class="spinner"></div>Loading…</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ MODALS ═══════════════ -->
+<div id="modal-container"></div>
+
+<!-- ═══════════════ TOAST ═══════════════ -->
+<div id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// CONFIG
+// ═══════════════════════════════════════════════════════
+const API_URL = "https://script.google.com/macros/s/AKfycbwVrlLp5HNs65iA8PE3frDmJSgphr9I0heKYL8yiD0Bp_IW6hmGl0hGcQIbXu6IqFG9/exec"; // ← Replace after setup
+const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
+const EDIT_WINDOW = 15 * 60 * 1000;     // 15 minutes
+const MONTHS = ["January","February","March","April","May","June",
+                "July","August","September","October","November","December"];
+
+// ═══════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════
+let state = {
+  user: null,        // { role, label }
+  members: [],
+  currentPage: "dashboard",
+  sessionTimer: null,
+  lastActivity: Date.now()
+};
+
+// ═══════════════════════════════════════════════════════
+// API
+// ═══════════════════════════════════════════════════════
+async function api(action, data = {}) {
+  try {
+    const body = JSON.stringify({ action, ...data,
+      userRole: state.user?.role, userLabel: state.user?.label });
+    const res = await fetch(API_URL, {
+      method: "POST",
+      body,
+      headers: { "Content-Type": "application/json" }
+    });
+    return await res.json();
+  } catch (err) {
+    return { ok: false, error: "Connection error. Check internet." };
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════════════
+let toastTimer;
+function toast(msg, type = "ok") {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.className = "show toast-" + type;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.className = "", 3200);
+}
+
+// ═══════════════════════════════════════════════════════
+// SESSION
+// ═══════════════════════════════════════════════════════
+function resetSession() {
+  state.lastActivity = Date.now();
+  clearTimeout(state.sessionTimer);
+  state.sessionTimer = setTimeout(autoLogout, SESSION_TIMEOUT);
+}
+
+function autoLogout() {
+  toast("Session expired. Please sign in again.", "err");
+  setTimeout(logout, 1500);
+}
+
+document.addEventListener("click", resetSession);
+document.addEventListener("keydown", resetSession);
+
+// ═══════════════════════════════════════════════════════
+// AUTH
+// ═══════════════════════════════════════════════════════
+async function doLogin() {
+  const pin = document.getElementById("pin-input").value.trim();
+  const btn = document.getElementById("login-btn");
+  const err = document.getElementById("login-error");
+  if (!pin) { showLoginError("Please enter your PIN."); return; }
+
+  btn.innerHTML = '<span class="spinner"></span> Verifying…';
+  btn.disabled = true;
+  err.classList.add("hidden");
+
+  const res = await api("login", { pin });
+  if (res.ok) {
+    state.user = { role: res.role, label: res.label };
+    document.getElementById("login-screen").style.display = "none";
+    document.getElementById("app").style.display = "block";
+    applyRoleUI();
+    resetSession();
+    navigate("dashboard");
+    await loadMembers();
+  } else {
+    showLoginError(res.error || "Invalid PIN.");
+    document.getElementById("pin-input").value = "";
+    document.getElementById("pin-input").focus();
+  }
+  btn.innerHTML = "Sign In";
+  btn.disabled = false;
+}
+
+function showLoginError(msg) {
+  const e = document.getElementById("login-error");
+  e.textContent = msg; e.classList.remove("hidden");
+}
+
+function applyRoleUI() {
+  const role = state.user.role;
+  document.getElementById("sidebar-role").textContent = state.user.label;
+
+  // Hide members nav for search-only
+  if (role === "search") {
+    document.getElementById("nav-members").classList.add("hidden");
+    document.getElementById("nav-payment").classList.add("hidden");
+  }
+  // Show audit only for admin
+  if (role === "admin") {
+    document.getElementById("nav-audit").classList.remove("hidden");
+  }
+}
+
+function confirmLogout() {
+  if (confirm("Sign out of UDC?")) logout();
+}
+
+function logout() {
+  state.user = null;
+  clearTimeout(state.sessionTimer);
+  document.getElementById("app").style.display = "none";
+  document.getElementById("login-screen").style.display = "flex";
+  document.getElementById("pin-input").value = "";
+  document.getElementById("login-error").classList.add("hidden");
+}
+
+// ═══════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════
+const PAGE_TITLES = {
+  dashboard: "Dashboard", members: "Members",
+  payment: "Payment Entry", search: "Member Search",
+  monthly: "Monthly Report", audit: "Audit Log"
+};
+
+async function navigate(page, el) {
+  // Role guard
+  const role = state.user?.role;
+  if (role === "search" && ["members","payment","audit"].includes(page)) {
+    toast("You don't have access to this section.", "err"); return;
+  }
+
+  state.currentPage = page;
+  document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+  if (el) el.classList.add("active");
+  else {
+    const nav = document.querySelector(`.nav-item[data-page="${page}"]`);
+    if (nav) nav.classList.add("active");
+  }
+  document.getElementById("topbar-title").textContent = PAGE_TITLES[page] || page;
+  document.getElementById("topbar-right").innerHTML = "";
+
+  const content = document.getElementById("page-content");
+  content.innerHTML = '<div class="page-loader"><div class="spinner"></div>Loading…</div>';
+
+  switch(page) {
+    case "dashboard": await renderDashboard(); break;
+    case "members":   await renderMembers();   break;
+    case "payment":   await renderPayment();   break;
+    case "search":    renderSearch();          break;
+    case "monthly":   await renderMonthly();   break;
+    case "audit":     await renderAudit();     break;
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// LOAD MEMBERS (cached)
+// ═══════════════════════════════════════════════════════
+async function loadMembers(force = false) {
+  if (!force && state.members.length > 0) return;
+  const res = await api("getMembers");
+  if (res.ok) state.members = res.members;
+}
+
+// ═══════════════════════════════════════════════════════
+// DASHBOARD
+// ═══════════════════════════════════════════════════════
+async function renderDashboard() {
+  const res = await api("getDashboard");
+  if (!res.ok) {
+    setContent(`<div class="card"><p class="text-red">Error: ${esc(res.error)}</p></div>`);
+    return;
+  }
+  const k = res.kpis;
+  const html = `
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-label">Active Members</div>
+      <div class="kpi-value">${k.activeMembers}</div>
+      <div class="kpi-sub">${k.inactiveMembers} inactive</div>
+      <div class="kpi-accent" style="background:var(--slate)"></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Fees Collected</div>
+      <div class="kpi-value text-teal">${fmt(k.totalFees)}</div>
+      <div class="kpi-sub">Year to date</div>
+      <div class="kpi-accent" style="background:var(--teal2)"></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Total Donations</div>
+      <div class="kpi-value text-gold">${fmt(k.totalDonations)}</div>
+      <div class="kpi-sub">Year to date</div>
+      <div class="kpi-accent" style="background:var(--gold)"></div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Pending Balance</div>
+      <div class="kpi-value text-red">${fmt(k.totalPending)}</div>
+      <div class="kpi-sub">Outstanding</div>
+      <div class="kpi-accent" style="background:var(--red)"></div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+    <div class="card">
+      <div class="card-title">📅 This Month — ${esc(k.currentMonth)}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="fin-card">
+          <div class="fin-label">Fees Collected</div>
+          <div class="fin-value text-teal">${fmt(k.thisMonthFees)}</div>
+        </div>
+        <div class="fin-card">
+          <div class="fin-label">Members Paid</div>
+          <div class="fin-value text-grn">${k.thisMonthPaid}</div>
+        </div>
+        <div class="fin-card">
+          <div class="fin-label">Unpaid</div>
+          <div class="fin-value text-red">${k.thisMonthUnpaid}</div>
+        </div>
+        <div class="fin-card">
+          <div class="fin-label">Last Receipt</div>
+          <div class="fin-value" style="font-size:14px">${esc(k.lastReceiptNo)}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📈 Collection Trend</div>
+      ${renderBarChart(res.monthlySummary)}
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div class="card">
+      <div class="card-title">🏙️ City Breakdown</div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>City</th><th>Active</th><th>Fees</th><th>Pending</th></tr>
+          ${res.cityBreakdown.map(c => `
+          <tr>
+            <td><strong>${esc(c.city)}</strong></td>
+            <td>${c.active}</td>
+            <td>${fmt(c.fees)}</td>
+            <td><span class="pill ${c.pending>0?'pill-red':'pill-grn'}">${fmt(c.pending)}</span></td>
+          </tr>`).join("")}
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📊 Monthly Summary</div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Month</th><th>Fees</th><th>Paid</th><th>Unpaid</th></tr>
+          ${res.monthlySummary.filter(m=>m.fees>0||m.paid>0).map(m=>`
+          <tr>
+            <td>${m.month.substring(0,3)}</td>
+            <td>${fmt(m.fees)}</td>
+            <td><span class="pill pill-grn">${m.paid}</span></td>
+            <td><span class="pill ${m.unpaid>0?'pill-red':'pill-gray'}">${m.unpaid}</span></td>
+          </tr>`).join("")}
+        </table>
+      </div>
+    </div>
+  </div>`;
+  setContent(html);
+}
+
+function renderBarChart(monthly) {
+  const visible = monthly.filter((_,i) => i < 6);
+  const max = Math.max(...visible.map(m => m.fees), 1);
+  return `
+  <div class="bar-chart">
+    ${visible.map(m => {
+      const h = Math.round((m.fees / max) * 72);
+      return `<div class="bar-col">
+        <div class="bar" style="height:${h}px" title="${m.month}: ${fmt(m.fees)}"></div>
+        <div class="bar-lbl">${m.month.substring(0,3)}</div>
+      </div>`;
+    }).join("")}
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════════
+// MEMBERS
+// ═══════════════════════════════════════════════════════
+async function renderMembers() {
+  await loadMembers(true);
+  const canEdit = ["admin","pe"].includes(state.user.role);
+
+  document.getElementById("topbar-right").innerHTML = canEdit
+    ? `<button class="btn btn-primary btn-sm" onclick="openAddMember()">+ Add Member</button>`
+    : "";
+
+  const html = `
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input id="member-search" placeholder="Search by name or code…"
+      oninput="filterMembers(this.value)">
+  </div>
+  <div class="table-wrap" id="members-table">
+    ${renderMembersTable(state.members)}
+  </div>`;
+  setContent(html);
+}
+
+function renderMembersTable(members) {
+  if (!members.length) return `<div class="empty"><div class="empty-icon">👥</div>No members found</div>`;
+  return `<table>
+    <tr>
+      <th>Code</th><th>Name</th><th>City</th>
+      <th>Fee</th><th>Opening Bal</th><th>Status</th>
+      <th>Join Month</th><th>Pending</th><th>Actions</th>
+    </tr>
+    ${members.map(m => {
+      const pending = calcPending(m);
+      const canEdit = ["admin","pe"].includes(state.user.role);
+      return `<tr>
+        <td><strong>${esc(m.code)}</strong></td>
+        <td>${esc(m.name)}</td>
+        <td>${esc(m.city)}</td>
+        <td>${fmt(m.fee)}</td>
+        <td>${fmt(m.openingBal)}</td>
+        <td><span class="pill ${m.status==="Active"?"pill-grn":"pill-red"}">${esc(m.status)}</span></td>
+        <td>${esc(m.joinMonth)}</td>
+        <td><span class="pill ${pending>0?"pill-red":pending<0?"pill-teal":"pill-grn"}">${fmt(pending)}</span></td>
+        <td>
+          <button class="btn btn-sm" onclick="navigate('search');setTimeout(()=>searchMember('${esc(m.code)}'),800)">View</button>
+          ${canEdit?`<button class="btn btn-sm" onclick="openEditMember('${esc(m.code)}')">Edit</button>`:""}
+        </td>
+      </tr>`;
+    }).join("")}
+  </table>`;
+}
+
+function filterMembers(q) {
+  const filtered = q
+    ? state.members.filter(m =>
+        m.name.toLowerCase().includes(q.toLowerCase()) ||
+        m.code.toLowerCase().includes(q.toLowerCase()))
+    : state.members;
+  document.getElementById("members-table").innerHTML = renderMembersTable(filtered);
+}
+
+function calcPending(m) {
+  // Simple front-end estimate (accurate calc is server-side)
+  const joinIdx = MONTHS.indexOf(m.joinMonth);
+  const mo = joinIdx >= 0 ? 12 - joinIdx : 12;
+  return Number(m.openingBal || 0) + (Number(m.fee) * mo);
+}
+
+// ── Add Member Modal ────────────────────────────────────
+function openAddMember() {
+  const def = { code:"", name:"", city:"Dammam", contact:"",
+    fee:10, openingBal:0, status:"Active", joinMonth:"January" };
+  memberModal("Add Member", def, false);
+}
+
+function openEditMember(code) {
+  const m = state.members.find(x => x.code === code);
+  if (!m) return;
+  memberModal("Edit Member", m, true);
+}
+
+function memberModal(title, m, isEdit) {
+  const cityOpts = ["Dammam","Jubail","Khobar","Sarrar","Riyadh"]
+    .map(c => `<option ${m.city===c?"selected":""}>${c}</option>`).join("");
+  const statusOpts = ["Active","Inactive"]
+    .map(s => `<option ${m.status===s?"selected":""}>${s}</option>`).join("");
+  const monthOpts = MONTHS
+    .map(mo => `<option ${m.joinMonth===mo?"selected":""}>${mo}</option>`).join("");
+
+  showModal(title, `
+  <div class="form-grid">
+    <div class="form-group">
+      <label>Member Code <span class="required-star">*</span></label>
+      <input id="m-code" class="inp-highlight" value="${esc(m.code)}"
+        placeholder="M001" ${isEdit?"readonly":""}>
+    </div>
+    <div class="form-group">
+      <label>Full Name <span class="required-star">*</span></label>
+      <input id="m-name" class="inp-highlight" value="${esc(m.name)}" placeholder="Full name">
+    </div>
+    <div class="form-group">
+      <label>City <span class="required-star">*</span></label>
+      <select id="m-city">${cityOpts}</select>
+    </div>
+    <div class="form-group">
+      <label>Contact (WhatsApp)</label>
+      <input id="m-contact" value="${esc(m.contact)}" placeholder="966501234567">
+    </div>
+    <div class="form-group">
+      <label>Monthly Fee <span class="required-star">*</span></label>
+      <input id="m-fee" type="number" class="inp-highlight" value="${m.fee}" min="0">
+    </div>
+    <div class="form-group">
+      <label>Opening Balance (Prior Year Debt)</label>
+      <input id="m-openingbal" type="number" value="${m.openingBal||0}" min="0">
+    </div>
+    <div class="form-group">
+      <label>Status</label>
+      <select id="m-status">${statusOpts}</select>
+    </div>
+    <div class="form-group">
+      <label>Join Month <span class="required-star">*</span></label>
+      <select id="m-joinmonth">${monthOpts}</select>
+    </div>
+  </div>`,
+  [{label: isEdit ? "Save Changes" : "Add Member", cls:"btn-primary",
+    action: () => saveMember(isEdit)}]);
+}
+
+async function saveMember(isEdit) {
+  const m = {
+    code:       document.getElementById("m-code").value.trim().toUpperCase(),
+    name:       document.getElementById("m-name").value.trim(),
+    city:       document.getElementById("m-city").value,
+    contact:    document.getElementById("m-contact").value.trim(),
+    fee:        Number(document.getElementById("m-fee").value),
+    openingBal: Number(document.getElementById("m-openingbal").value),
+    status:     document.getElementById("m-status").value,
+    joinMonth:  document.getElementById("m-joinmonth").value,
+  };
+  if (!m.code || !m.name || !m.fee) {
+    toast("Please fill all required fields.", "err"); return;
+  }
+  const action = isEdit ? "editMember" : "addMember";
+  const res = await api(action, { member: m });
+  if (res.ok) {
+    toast(res.message, "ok");
+    closeModal();
+    await loadMembers(true);
+    renderMembers();
+  } else {
+    toast(res.error || "Error saving member.", "err");
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// PAYMENT ENTRY
+// ═══════════════════════════════════════════════════════
+async function renderPayment() {
+  await loadMembers();
+  const activeMembers = state.members.filter(m => m.status === "Active");
+  const memberOpts = activeMembers
+    .map(m => `<option value="${esc(m.code)}">${esc(m.code)} — ${esc(m.name)}</option>`)
+    .join("");
+  const today = new Date().toISOString().split("T")[0];
+
+  const html = `
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div>
+      <div class="card">
+        <div class="card-title">💳 Record New Payment</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Member <span class="required-star">*</span></label>
+            <select id="p-member" onchange="updateMemberFee(this.value)">
+              <option value="">— Select Active Member —</option>
+              ${memberOpts}
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Date <span class="required-star">*</span></label>
+            <input id="p-date" type="date" class="inp-highlight" value="${today}">
+          </div>
+          <div class="form-group">
+            <label>Payment Type <span class="required-star">*</span></label>
+            <select id="p-type">
+              <option>Membership Fee</option>
+              <option>Donation</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Amount <span class="required-star">*</span></label>
+            <input id="p-amount" type="number" class="inp-highlight"
+              placeholder="0" min="0" id="p-amount">
+          </div>
+          <div class="form-group form-full">
+            <label>Remarks</label>
+            <select id="p-remarks">
+              <option value="">— Select Remark —</option>
+              <option>Monthly Fee</option>
+              <option>Advance Payment</option>
+              <option>Donation - General</option>
+              <option>Donation - Project</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex gap-8 mt-16 items-center">
+          <button class="btn btn-primary" onclick="savePayment()" id="save-pay-btn">
+            💾 Save Payment
+          </button>
+          <button class="btn" onclick="clearPaymentForm()">✕ Clear</button>
+          <span class="text-xs text-muted" style="margin-left:auto">
+            🛡️ Duplicate check active
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-title">🕐 Recent Payments</div>
+        <div id="recent-payments-list">
+          <div class="page-loader"><div class="spinner"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  setContent(html);
+  loadRecentPayments();
+}
+
+function updateMemberFee(code) {
+  const m = state.members.find(x => x.code === code);
+  if (m) {
+    const a = document.getElementById("p-amount");
+    if (!a.value) a.value = m.fee;
+  }
+}
+
+async function loadRecentPayments() {
+  const res = await api("getPayments", {});
+  const el  = document.getElementById("recent-payments-list");
+  if (!el) return;
+  if (!res.ok) { el.innerHTML = `<p class="text-red text-sm">${esc(res.error)}</p>`; return; }
+  const recent = (res.payments || []).slice(0, 12);
+  if (!recent.length) {
+    el.innerHTML = `<div class="empty"><div class="empty-icon">💳</div>No payments yet</div>`;
+    return;
+  }
+  el.innerHTML = recent.map(p => {
+    const isFee  = p.type === "Membership Fee";
+    const now    = Date.now();
+    const canEdit = (state.user.role === "admin") ||
+      (["admin","pe"].includes(state.user.role) && (now - p.savedAt) < EDIT_WINDOW);
+    const timeLeft = Math.max(0, Math.round((EDIT_WINDOW - (now - p.savedAt)) / 60000));
+    return `
+    <div class="history-item">
+      <div class="history-icon ${isFee?"hi-fee":"hi-don"}">
+        ${isFee ? "💳" : "🤲"}
+      </div>
+      <div class="history-info">
+        <div class="history-receipt">${esc(p.receiptNo)}
+          ${canEdit && state.user.role!=="admin" ?
+            `<span class="timer-badge">⏱ ${timeLeft}m left</span>` : ""}
+        </div>
+        <div class="history-detail">${esc(p.memberName)} · ${esc(p.date)} · ${esc(p.month)}</div>
+      </div>
+      <div class="history-amount ${isFee?"text-teal":"text-gold"}">${fmt(p.amount)}</div>
+      ${canEdit ? `
+        <button class="btn btn-sm btn-icon" onclick="openEditPayment('${esc(p.receiptNo)}')"
+          title="Edit">✏️</button>
+        <button class="btn btn-sm btn-icon btn-danger" onclick="confirmDeletePayment('${esc(p.receiptNo)}')"
+          title="Delete">🗑️</button>` : ""}
+    </div>`;
+  }).join("");
+}
+
+async function savePayment() {
+  const memberCode = document.getElementById("p-member").value;
+  const date       = document.getElementById("p-date").value;
+  const type       = document.getElementById("p-type").value;
+  const amount     = document.getElementById("p-amount").value;
+  const remarks    = document.getElementById("p-remarks").value;
+
+  if (!memberCode || !date || !type || !amount) {
+    toast("Please fill all required fields.", "err"); return;
+  }
+
+  const btn = document.getElementById("save-pay-btn");
+  btn.innerHTML = '<span class="spinner"></span> Saving…';
+  btn.disabled = true;
+
+  const res = await api("addPayment", {
+    payment: { memberCode, date, type, amount: Number(amount), remarks }
+  });
+
+  if (res.ok) {
+    toast("Payment saved — " + res.receiptNo, "ok");
+    clearPaymentForm();
+    loadRecentPayments();
+    // Show WhatsApp receipt popup
+    showReceiptPopup(res, { memberCode, date, type, amount, remarks });
+  } else {
+    toast(res.error || "Error saving payment.", "err");
+  }
+  btn.innerHTML = "💾 Save Payment";
+  btn.disabled = false;
+}
+
+function clearPaymentForm() {
+  document.getElementById("p-member").value = "";
+  document.getElementById("p-type").value = "Membership Fee";
+  document.getElementById("p-amount").value = "";
+  document.getElementById("p-remarks").value = "";
+  const today = new Date().toISOString().split("T")[0];
+  document.getElementById("p-date").value = today;
+}
+
+// ── WhatsApp receipt popup ──────────────────────────────
+function showReceiptPopup(res, p) {
+  const m = state.members.find(x => x.code === p.memberCode) || {};
+  const contact = m.contact || "";
+  const receiptText =
+`🧾 *OFFICIAL RECEIPT*
+Udyawar Dammam Committee
+---------------------------------------
+*Receipt No:* ${res.receiptNo}
+*Date:* ${formatDateDisplay(p.date)}
+---------------------------------------
+*Received From:* ${esc(res.memberName)} (${esc(p.memberCode)})
+*Amount:* ${fmt(p.amount)}
+*Payment For:* ${esc(p.type)}
+---------------------------------------
+*Remarks:* ${esc(p.remarks || "—")}
+---------------------------------------
+This is a computer-generated receipt.
+JazakAllahu Khayran for your support.`;
+
+  const waLink = contact
+    ? `https://web.whatsapp.com/send?phone=${contact}&text=${encodeURIComponent(receiptText)}`
+    : "";
+
+  showModal("✅ Payment Saved — " + res.receiptNo,
+    `<div class="section-hdr">Receipt Ready to Send</div>
+    <div class="receipt-box" id="receipt-text">${receiptText}</div>
+    <div class="flex gap-8 mt-12">
+      <button class="btn btn-sm" onclick="copyReceipt()">📋 Copy Text</button>
+      ${waLink ? `<a href="${waLink}" target="_blank" class="btn btn-sm" style="text-decoration:none">
+        📱 Open WhatsApp Web</a>` : ""}
+      <button class="btn btn-sm btn-primary" onclick="downloadReceiptPDF('${esc(res.receiptNo)}','${encodeURIComponent(receiptText)}')">
+        📄 Download PDF
+      </button>
+    </div>`,
+    [{ label: "Close", cls: "", action: closeModal }]
+  );
+}
+
+function copyReceipt() {
+  const text = document.getElementById("receipt-text").innerText;
+  navigator.clipboard.writeText(text).then(() => toast("Receipt copied!", "ok"));
+}
+
+function downloadReceiptPDF(receiptNo, encodedText) {
+  const text = decodeURIComponent(encodedText);
+  const win  = window.open("", "_blank");
+  win.document.write(`
+  <!DOCTYPE html><html><head><title>Receipt ${receiptNo}</title>
+  <style>
+    body{font-family:'Courier New',monospace;padding:40px;max-width:400px;margin:0 auto;font-size:13px;line-height:1.8}
+    .title{font-size:18px;font-weight:bold;text-align:center;margin-bottom:20px}
+    pre{white-space:pre-wrap;word-wrap:break-word}
+    @media print{body{padding:20px}}
+  </style></head>
+  <body>
+    <div class="title">UDC — Udyawar Dammam Committee</div>
+    <pre>${text.replace(/</g,"&lt;").replace(/>/g,"&gt;")}</pre>
+    <script>window.onload=function(){window.print()}<\/script>
+  </body></html>`);
+  win.document.close();
+}
+
+// ── Edit Payment ────────────────────────────────────────
+async function openEditPayment(receiptNo) {
+  const res = await api("getPayments", {});
+  const p   = (res.payments || []).find(x => x.receiptNo === receiptNo);
+  if (!p) { toast("Payment not found.", "err"); return; }
+
+  const memberOpts = state.members
+    .filter(m => m.status === "Active")
+    .map(m => `<option value="${esc(m.code)}" ${m.code===p.memberCode?"selected":""}>
+      ${esc(m.code)} — ${esc(m.name)}</option>`).join("");
+
+  showModal("Edit Payment — " + receiptNo, `
+  <div class="form-grid">
+    <div class="form-group">
+      <label>Member</label>
+      <select id="ep-member">${memberOpts}</select>
+    </div>
+    <div class="form-group">
+      <label>Date</label>
+      <input id="ep-date" type="date" value="${p.date.split("-").reverse().join("-")||""}">
+    </div>
+    <div class="form-group">
+      <label>Payment Type</label>
+      <select id="ep-type">
+        <option ${p.type==="Membership Fee"?"selected":""}>Membership Fee</option>
+        <option ${p.type==="Donation"?"selected":""}>Donation</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Amount</label>
+      <input id="ep-amount" type="number" value="${p.amount}">
+    </div>
+    <div class="form-group form-full">
+      <label>Remarks</label>
+      <input id="ep-remarks" value="${esc(p.remarks)}">
+    </div>
+  </div>`,
+  [{ label: "Save Changes", cls: "btn-primary",
+    action: () => submitEditPayment(receiptNo, p) }]);
+}
+
+async function submitEditPayment(receiptNo, orig) {
+  const m = state.members.find(x => x.code === document.getElementById("ep-member").value);
+  const res = await api("editPayment", { payment: {
+    receiptNo,
+    memberCode: document.getElementById("ep-member").value,
+    memberName: m ? m.name : orig.memberName,
+    date:       document.getElementById("ep-date").value,
+    type:       document.getElementById("ep-type").value,
+    amount:     Number(document.getElementById("ep-amount").value),
+    remarks:    document.getElementById("ep-remarks").value,
+  }});
+  if (res.ok) {
+    toast("Payment updated.", "ok"); closeModal(); loadRecentPayments();
+  } else {
+    toast(res.error || "Error.", "err");
+  }
+}
+
+async function confirmDeletePayment(receiptNo) {
+  if (!confirm(`Delete payment ${receiptNo}? This cannot be undone.`)) return;
+  const res = await api("deletePayment", { receiptNo });
+  if (res.ok) { toast("Payment deleted.", "ok"); loadRecentPayments(); }
+  else toast(res.error || "Error.", "err");
+}
+
+// ═══════════════════════════════════════════════════════
+// MEMBER SEARCH
+// ═══════════════════════════════════════════════════════
+function renderSearch() {
+  setContent(`
+  <div class="card">
+    <div class="card-title">🔍 Search Member</div>
+    <div class="flex gap-12 items-center">
+      <div style="flex:1" class="form-group">
+        <input id="search-input" placeholder="Type member code or name…"
+          list="members-datalist" oninput="liveSearch(this.value)"
+          onkeydown="if(event.key==='Enter')doSearch()">
+        <datalist id="members-datalist">
+          ${state.members.map(m =>
+            `<option value="${m.code}">${m.code} — ${m.name}</option>`
+          ).join("")}
+        </datalist>
+      </div>
+      <button class="btn btn-primary" onclick="doSearch()">Search</button>
+    </div>
+  </div>
+  <div id="search-result"></div>`);
+}
+
+function liveSearch(val) {
+  if (val.length >= 3) {
+    const match = state.members.find(m =>
+      m.code.toLowerCase() === val.toLowerCase() ||
+      m.name.toLowerCase().includes(val.toLowerCase()));
+    if (match) searchMember(match.code);
+  }
+}
+
+async function doSearch() {
+  const val = document.getElementById("search-input").value.trim();
+  const match = state.members.find(m =>
+    m.code.toLowerCase() === val.toLowerCase() ||
+    m.name.toLowerCase().includes(val.toLowerCase()));
+  if (match) await searchMember(match.code);
+  else toast("Member not found.", "err");
+}
+
+async function searchMember(code) {
+  const el = document.getElementById("search-result");
+  if (!el) return;
+  el.innerHTML = '<div class="page-loader"><div class="spinner"></div>Loading member profile…</div>';
+
+  const res = await api("getMemberSummary", { memberCode: code });
+  if (!res.ok) { el.innerHTML = `<p class="text-red">${esc(res.error)}</p>`; return; }
+
+  const m = res.member;
+  const s = res.summary;
+  const initials = m.name.split(" ").map(w=>w[0]).join("").substring(0,2).toUpperCase();
+  const contact = m.contact || "";
+  const waMsg = buildWhatsAppMessage(m, s);
+  const waLink = contact
+    ? `https://web.whatsapp.com/send?phone=${contact}&text=${encodeURIComponent(waMsg)}`
+    : "";
+
+  el.innerHTML = `
+  <div class="card">
+    <div class="profile-hdr">
+      <div class="avatar">${initials}</div>
+      <div style="flex:1">
+        <div class="profile-name">${esc(m.name)}</div>
+        <div class="profile-meta">${esc(m.code)} · ${esc(m.city)} ·
+          <span class="pill ${m.status==="Active"?"pill-grn":"pill-red"}" style="font-size:10px">
+            ${esc(m.status)}</span>
+        </div>
+        <div class="profile-meta mt-8">📞 ${esc(m.contact||"—")} · 💰 Fee: ${fmt(m.fee)}/month</div>
+      </div>
+      ${waLink ? `<a href="${waLink}" target="_blank" class="btn btn-sm" style="text-decoration:none">
+        📱 WhatsApp</a>` : ""}
+    </div>
+  </div>
+
+  <div class="fin-grid">
+    <div class="fin-card">
+      <div class="fin-label">Total Fees Paid</div>
+      <div class="fin-value text-teal">${fmt(s.totalFees)}</div>
+    </div>
+    <div class="fin-card">
+      <div class="fin-label">Donations</div>
+      <div class="fin-value text-gold">${fmt(s.totalDonations)}</div>
+    </div>
+    <div class="fin-card">
+      <div class="fin-label">Grand Total</div>
+      <div class="fin-value">${fmt(s.grandTotal)}</div>
+    </div>
+    <div class="fin-card">
+      <div class="fin-label">Annual Due</div>
+      <div class="fin-value">${fmt(s.annualDue)}</div>
+    </div>
+    <div class="fin-card" style="background:${s.pendingBal>0?"var(--lred)":"var(--lgrn)"}">
+      <div class="fin-label">Pending Balance</div>
+      <div class="fin-value ${s.pendingBal>0?"text-red":"text-grn"}">${fmt(s.pendingBal)}</div>
+    </div>
+    <div class="fin-card" style="background:var(--lteal)">
+      <div class="fin-label">Paid Up To</div>
+      <div class="fin-value text-teal" style="font-size:13px">${esc(s.paidUpTo)}</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-hdr">Monthly Payment Status</div>
+    <div class="month-grid">
+      ${MONTHS.map(mo => {
+        const st = res.monthStatus[mo] || "na";
+        const cls = st==="paid"?"mc-paid":st==="unpaid"?"mc-unpaid":"mc-na";
+        const icon = st==="paid"?"✅":st==="unpaid"?"❌":"—";
+        return `<div>
+          <div class="month-cell ${cls}">${mo.substring(0,3)}</div>
+          <div class="mc-label">${icon}</div>
+        </div>`;
+      }).join("")}
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="flex justify-between items-center mb-16">
+      <div class="section-hdr" style="margin:0">Payment History</div>
+      <button class="btn btn-sm btn-primary"
+        onclick="downloadMemberStatement('${esc(m.code)}')">📄 Statement PDF</button>
+    </div>
+    ${res.payments.length === 0
+      ? `<div class="empty"><div class="empty-icon">💳</div>No payments recorded</div>`
+      : `<div class="table-wrap"><table>
+          <tr><th>Receipt</th><th>Date</th><th>Type</th><th>Amount</th><th>Remarks</th><th>Month</th></tr>
+          ${res.payments.map(p => `
+          <tr>
+            <td><strong>${esc(p.receiptNo)}</strong></td>
+            <td>${esc(p.date)}</td>
+            <td><span class="pill ${p.type==="Membership Fee"?"pill-teal":"pill-gold"}">
+              ${esc(p.type)}</span></td>
+            <td><strong>${fmt(p.amount)}</strong></td>
+            <td>${esc(p.remarks||"—")}</td>
+            <td>${esc(p.month)}</td>
+          </tr>`).join("")}
+        </table></div>`}
+    <div class="divider"></div>
+    <div class="section-hdr">WhatsApp Message</div>
+    <div class="receipt-box" id="wa-msg-box">${waMsg}</div>
+    <div class="flex gap-8 mt-12">
+      <button class="btn btn-sm" onclick="copyWAMsg()">📋 Copy</button>
+      ${waLink?`<a href="${waLink}" target="_blank" class="btn btn-sm" style="text-decoration:none">
+        📱 Open WhatsApp Web</a>`:""}
+    </div>
+  </div>`;
+}
+
+function buildWhatsAppMessage(m, s) {
+  return `Assalamu Alaikum,
+
+Dear ${m.name} (${m.code}),
+
+Your UIEO membership record:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Paid Up To    : ${s.paidUpTo}
+Fees Paid     : ${fmt(s.totalFees)}
+Donations     : ${fmt(s.totalDonations)}
+Pending Bal   : ${fmt(s.pendingBal)}
+Last Payment  : ${s.lastPayment}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+JazakAllahu Khayran for your support.
+— Udyawar Dammam Committee`;
+}
+
+function copyWAMsg() {
+  const text = document.getElementById("wa-msg-box").innerText;
+  navigator.clipboard.writeText(text).then(() => toast("Message copied!", "ok"));
+}
+
+function downloadMemberStatement(code) {
+  const m = state.members.find(x => x.code === code);
+  if (!m) return;
+  api("getMemberSummary", { memberCode: code }).then(res => {
+    if (!res.ok) return;
+    const s = res.summary;
+    const rows = res.payments.map(p =>
+      `<tr><td>${p.receiptNo}</td><td>${p.date}</td><td>${p.type}</td>
+       <td>${fmt(p.amount)}</td><td>${p.remarks||"—"}</td><td>${p.month}</td></tr>`
+    ).join("");
+    const win = window.open("","_blank");
+    win.document.write(`<!DOCTYPE html><html><head><title>Statement - ${m.code}</title>
+    <style>body{font-family:Arial,sans-serif;padding:30px;max-width:700px;margin:0 auto;font-size:13px}
+    h1{font-size:18px;color:#2C3E50}h2{font-size:14px;color:#7F8C8D;font-weight:normal}
+    table{width:100%;border-collapse:collapse;margin-top:16px}
+    th{background:#2C3E50;color:#fff;padding:8px 10px;text-align:left;font-size:12px}
+    td{padding:8px 10px;border-bottom:1px solid #eee;font-size:12px}
+    .summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+    .sum-box{background:#f5f6fa;border-radius:8px;padding:12px}
+    .sum-label{font-size:11px;color:#7F8C8D;margin-bottom:4px}
+    .sum-val{font-size:18px;font-weight:bold;color:#2C3E50}
+    @media print{body{padding:15px}}</style></head>
+    <body>
+    <h1>Member Statement — ${m.name}</h1>
+    <h2>${m.code} · ${m.city} · ${m.status} · Fee: ${fmt(m.fee)}/month</h2>
+    <div class="summary">
+      <div class="sum-box"><div class="sum-label">Total Fees</div><div class="sum-val">${fmt(s.totalFees)}</div></div>
+      <div class="sum-box"><div class="sum-label">Pending Balance</div><div class="sum-val">${fmt(s.pendingBal)}</div></div>
+      <div class="sum-box"><div class="sum-label">Paid Up To</div><div class="sum-val" style="font-size:14px">${s.paidUpTo}</div></div>
+    </div>
+    <table><tr><th>Receipt</th><th>Date</th><th>Type</th><th>Amount</th><th>Remarks</th><th>Month</th></tr>
+    ${rows}</table>
+    <p style="margin-top:20px;font-size:11px;color:#999">Generated by UDC Membership System · Udyawar Dammam Committee</p>
+    <script>window.onload=function(){window.print()}<\/script>
+    </body></html>`);
+    win.document.close();
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+// MONTHLY REPORT
+// ═══════════════════════════════════════════════════════
+async function renderMonthly(month) {
+  const currentMonth = month || MONTHS[new Date().getMonth()];
+  const monthOpts = MONTHS.map(m =>
+    `<option ${m===currentMonth?"selected":""}>${m}</option>`).join("");
+
+  document.getElementById("topbar-right").innerHTML =
+    `<select onchange="renderMonthly(this.value)" style="font-size:13px;padding:6px 10px;
+      border-radius:8px;border:1px solid var(--border)">${monthOpts}</select>`;
+
+  const res = await api("getMonthlyReport", { month: currentMonth });
+  if (!res.ok) { setContent(`<p class="text-red">${esc(res.error)}</p>`); return; }
+
+  const k = res.kpis;
+  const html = `
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-label">Active Members</div>
+      <div class="kpi-value">${k.activeMembers}</div></div>
+    <div class="kpi"><div class="kpi-label">Fees This Month</div>
+      <div class="kpi-value text-teal">${fmt(k.feesThisMonth)}</div></div>
+    <div class="kpi"><div class="kpi-label">Members Paid</div>
+      <div class="kpi-value text-grn">${k.membersPaid}</div></div>
+    <div class="kpi"><div class="kpi-label">Unpaid</div>
+      <div class="kpi-value text-red">${k.unpaidCount}</div></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div class="card" style="padding:0">
+      <div style="padding:14px 16px;background:var(--lgrn);border-radius:var(--radius-lg)
+        var(--radius-lg) 0 0;font-weight:600;font-size:13px;color:var(--grn)">
+        ✅ Paid This Month (${res.paid.length})
+      </div>
+      ${res.paid.length===0
+        ? `<div class="empty">No payments yet</div>`
+        : `<div class="table-wrap" style="border:none;border-radius:0">
+          <table>
+            <tr><th>Code</th><th>Name</th><th>City</th><th>Amount</th></tr>
+            ${res.paid.map(p=>`
+            <tr>
+              <td><strong>${esc(p.code)}</strong></td>
+              <td>${esc(p.name)}</td>
+              <td>${esc(p.city)}</td>
+              <td><span class="pill pill-grn">${fmt(p.amount)}</span></td>
+            </tr>`).join("")}
+          </table>
+        </div>`}
+    </div>
+
+    <div class="card" style="padding:0">
+      <div style="padding:14px 16px;background:var(--lred);border-radius:var(--radius-lg)
+        var(--radius-lg) 0 0;font-weight:600;font-size:13px;color:var(--red)">
+        ❌ Unpaid This Month (${res.unpaid.length})
+      </div>
+      ${res.unpaid.length===0
+        ? `<div class="empty" style="padding:20px">All members paid! 🎉</div>`
+        : `<div class="table-wrap" style="border:none;border-radius:0">
+          <table>
+            <tr><th>Code</th><th>Name</th><th>City</th><th>Fee</th><th>Pending</th></tr>
+            ${res.unpaid.map(p=>`
+            <tr>
+              <td><strong>${esc(p.code)}</strong></td>
+              <td>${esc(p.name)}</td>
+              <td>${esc(p.city)}</td>
+              <td>${fmt(p.fee)}</td>
+              <td><span class="pill pill-red">${fmt(p.pending)}</span></td>
+            </tr>`).join("")}
+          </table>
+        </div>`}
+    </div>
+  </div>`;
+  setContent(html);
+}
+
+// ═══════════════════════════════════════════════════════
+// AUDIT LOG (Admin only)
+// ═══════════════════════════════════════════════════════
+async function renderAudit() {
+  if (state.user.role !== "admin") {
+    setContent('<div class="card"><p class="text-red">Access denied.</p></div>');
+    return;
+  }
+  const sh = "Audit Log"; // Read directly — no API needed for this simple view
+  const res = await api("getPayments", {}); // Placeholder — audit is in Sheet
+  setContent(`
+  <div class="card">
+    <div class="card-title">📋 Audit Log</div>
+    <p class="text-muted text-sm">
+      The Audit Log is recorded in real time in your Google Sheet.
+      Open your Google Sheet and click the "Audit Log" tab to view all actions.
+    </p>
+    <div class="mt-16">
+      <a href="https://docs.google.com/spreadsheets/d/${"1yl-weNggjW3awS1aYKno2wCC2Q2hQC-pdDZ2n_OSB9Y"}"
+        target="_blank" class="btn btn-primary">
+        📊 Open Google Sheet
+      </a>
+    </div>
+  </div>`);
+}
+
+// ═══════════════════════════════════════════════════════
+// MODAL
+// ═══════════════════════════════════════════════════════
+function showModal(title, bodyHtml, buttons = []) {
+  const btns = buttons.map(b =>
+    `<button class="btn ${b.cls||""}" onclick="${b.action.name||'closeModal'}()">
+      ${b.label}</button>`
+  ).join("");
+
+  // Register button actions
+  window._modalBtns = buttons;
+
+  document.getElementById("modal-container").innerHTML = `
+  <div class="modal-backdrop" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">${title}</div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body">${bodyHtml}</div>
+      <div class="modal-footer">
+        <button class="btn" onclick="closeModal()">Cancel</button>
+        ${buttons.map((b,i) =>
+          `<button class="btn ${b.cls||""}" id="modal-btn-${i}">${b.label}</button>`
+        ).join("")}
+      </div>
+    </div>
+  </div>`;
+
+  buttons.forEach((b,i) => {
+    document.getElementById("modal-btn-"+i).onclick = b.action;
+  });
+}
+
+function closeModal() {
+  document.getElementById("modal-container").innerHTML = "";
+}
+
+// ═══════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════
+function setContent(html) {
+  document.getElementById("page-content").innerHTML = html;
+}
+
+function esc(str) {
+  if (str == null) return "";
+  return String(str)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+function fmt(n) {
+  const num = Number(n) || 0;
+  return num.toLocaleString("en-US", { maximumFractionDigits: 0 });
+}
+
+function formatDateDisplay(dateStr) {
+  if (!dateStr) return "—";
+  const d = new Date(dateStr);
+  return d.toLocaleDateString("en-GB", {day:"2-digit",month:"short",year:"numeric"});
+}
+
+// ═══════════════════════════════════════════════════════
+// OFFLINE DETECTION
+// ═══════════════════════════════════════════════════════
+window.addEventListener("online",  () => {
+  document.getElementById("offline-banner").style.display = "none";
+});
+window.addEventListener("offline", () => {
+  document.getElementById("offline-banner").style.display = "block";
+});
+
+// ═══════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════
+document.getElementById("pin-input").focus();
+</script>
+</body>
+</html>
