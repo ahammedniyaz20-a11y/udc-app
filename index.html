@@ -1726,9 +1726,7 @@ function renderMemberCards(members) {
     const overdue  = getOverdueMonths(m);
     const ji       = MONTHS.indexOf(m.joinMonth);
     const mo       = ji >= 0 ? 12 - ji : 12;
-    const annualDue = m.annualDue !== undefined
-      ? m.annualDue
-      : Number(m.fee) * mo + Number(m.openingBal || 0);
+   const annualDue = (m.annualDue !== undefined) ? m.annualDue : (Number(m.fee) * mo + Number(m.openingBal || 0));
     const pct = annualDue > 0
       ? Math.min(100, Math.max(0, Math.round((1 - pending / annualDue) * 100)))
       : 100;
