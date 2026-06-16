@@ -1178,6 +1178,8 @@ function todayISO() {
 }
 
 function calcPending(m) {
+  if (m.pendingBal !== undefined) return m.pendingBal;
+  // fallback only if server didn't return pendingBal
   const ji = MONTHS.indexOf(m.joinMonth);
   const mo = ji >= 0 ? 12 - ji : 12;
   return Number(m.openingBal||0) + Number(m.fee) * mo;
@@ -1720,9 +1722,16 @@ function renderMemberCards(members) {
   const filtered = activeCity === "All" ? members : members.filter(m=>m.city===activeCity);
   if (!filtered.length) return `<div class="empty-state"><div class="empty-icon">👥</div><div class="empty-text">No members found</div></div>`;
   return `<div class="member-grid">${filtered.map(m=>{
-    const pending = calcPending(m);
-    const overdue = getOverdueMonths(m);
-    const pct = pending > 0 ? 0 : 100;
+    const pending  = calcPending(m);
+    const overdue  = getOverdueMonths(m);
+    const ji       = MONTHS.indexOf(m.joinMonth);
+    const mo       = ji >= 0 ? 12 - ji : 12;
+    const annualDue = m.annualDue !== undefined
+      ? m.annualDue
+      : Number(m.fee) * mo + Number(m.openingBal || 0);
+    const pct = annualDue > 0
+      ? Math.min(100, Math.max(0, Math.round((1 - pending / annualDue) * 100)))
+      : 100;
     return `
     <div class="member-card" onclick="viewMemberProfile('${esc(m.code)}')">
       <div class="mc-top">
