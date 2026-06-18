@@ -7,57 +7,25 @@
 <style>
 /* ═══════════════════════════════════════════════
    NOOR DESIGN SYSTEM — UDC
-   Primary:   #1B3C53  (Deep Teal)
-   Accent:    #E9762B  (Warm Orange)
-   BG:        #F5F5F0  (Off White)
-   Surface:   #FFFFFF
-   Card:      #E6D8C3  (Warm Cream)
-   Text:      #452829  (Dark Brown)
-   Muted:     #9A8678  (Warm Gray)
-   Success:   #5D866C  (Muted Green)
-   Danger:    #A03A13  (Deep Red)
-   Border:    #A1C2BD  (Light Sage)
 ═══════════════════════════════════════════════ */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
-  --pri:#1B3C53;
-  --pri-dk:#132C3E;
-  --pri-lt:#D4E4EE;
-  --acc:#E9762B;
-  --acc-lt:#FBE9D6;
-  --bg:#F5F5F0;
-  --surface:#FFFFFF;
-  --card:#E6D8C3;
-  --card-lt:#F0E8DB;
-  --text:#452829;
-  --muted:#9A8678;
-  --ok:#5D866C;
-  --ok-lt:#D6EAD9;
-  --danger:#A03A13;
-  --danger-lt:#F2DDD5;
-  --border:#A1C2BD;
-  --border-lt:#D9E8E6;
-  --sage:#A1C2BD;
-  --navy:#30364F;
-
-  --r:10px;
-  --r-lg:16px;
-  --r-xl:20px;
+  --pri:#1B3C53;--pri-dk:#132C3E;--pri-lt:#D4E4EE;
+  --acc:#E9762B;--acc-lt:#FBE9D6;
+  --bg:#F5F5F0;--surface:#FFFFFF;
+  --card:#E6D8C3;--card-lt:#F0E8DB;
+  --text:#452829;--muted:#9A8678;
+  --ok:#5D866C;--ok-lt:#D6EAD9;
+  --danger:#A03A13;--danger-lt:#F2DDD5;
+  --border:#A1C2BD;--border-lt:#D9E8E6;
+  --sage:#A1C2BD;--navy:#30364F;
+  --r:10px;--r-lg:16px;--r-xl:20px;
   --shadow:0 1px 4px rgba(27,60,83,0.10);
   --shadow-md:0 4px 16px rgba(27,60,83,0.12);
   --shadow-lg:0 8px 32px rgba(27,60,83,0.16);
-
-  --nav-h:64px;
-  --top-h:56px;
+  --nav-h:64px;--top-h:56px;
 }
-
-body{
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-  background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;
-  min-height:100vh;min-height:100dvh;
-}
-
-/* ── Utilities ── */
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;min-height:100vh;min-height:100dvh;}
 .hidden{display:none!important}
 .flex{display:flex}.items-center{align-items:center}
 .justify-between{justify-content:space-between}
@@ -68,592 +36,190 @@ body{
 .text-sm{font-size:12px}.text-xs{font-size:11px}
 .text-muted{color:var(--muted)}
 .fw-600{font-weight:600}.fw-500{font-weight:500}
-.w-full{width:100%}.text-center{text-align:center}
-.text-right{text-align:right}
+.w-full{width:100%}.text-center{text-align:center}.text-right{text-align:right}
 .text-ok{color:var(--ok)}.text-danger{color:var(--danger)}
 .text-acc{color:var(--acc)}.text-pri{color:var(--pri)}
 
-/* ══════════════════════════════════════
-   LOGIN
-══════════════════════════════════════ */
-#login-screen{
-  min-height:100vh;min-height:100dvh;
-  display:flex;align-items:center;justify-content:center;
-  background:var(--pri);
-  padding:24px;
-}
-.login-card{
-  background:var(--surface);
-  border-radius:var(--r-xl);
-  padding:40px 36px;
-  width:100%;max-width:380px;
-  box-shadow:var(--shadow-lg);
-}
+/* LOGIN */
+#login-screen{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;background:var(--pri);padding:24px;}
+.login-card{background:var(--surface);border-radius:var(--r-xl);padding:40px 36px;width:100%;max-width:380px;box-shadow:var(--shadow-lg);}
 .login-top{text-align:center;margin-bottom:36px}
-.login-badge{
-  width:72px;height:72px;
-  background:var(--pri);
-  border-radius:18px;
-  display:inline-flex;align-items:center;justify-content:center;
-  font-size:24px;font-weight:700;color:#fff;
-  letter-spacing:1px;
-  margin-bottom:16px;
-  box-shadow:0 4px 16px rgba(27,60,83,0.3);
-}
+.login-badge{width:72px;height:72px;background:var(--pri);border-radius:18px;display:inline-flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#fff;letter-spacing:1px;margin-bottom:16px;box-shadow:0 4px 16px rgba(27,60,83,0.3);}
 .login-org{font-size:17px;font-weight:700;color:var(--pri)}
 .login-tagline{font-size:12px;color:var(--muted);margin-top:4px}
-
-.pin-field{
-  text-align:center;
-  font-size:32px;
-  letter-spacing:10px;
-  font-weight:700;
-  border:2px solid var(--border);
-  border-radius:var(--r);
-  padding:16px;
-  color:var(--pri);
-  background:var(--bg);
-  width:100%;
-  transition:border-color .2s,box-shadow .2s;
-}
-.pin-field:focus{
-  outline:none;
-  border-color:var(--pri);
-  box-shadow:0 0 0 4px rgba(27,60,83,0.1);
-  background:#fff;
-}
+.pin-field{text-align:center;font-size:32px;letter-spacing:10px;font-weight:700;border:2px solid var(--border);border-radius:var(--r);padding:16px;color:var(--pri);background:var(--bg);width:100%;transition:border-color .2s,box-shadow .2s;}
+.pin-field:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 4px rgba(27,60,83,0.1);background:#fff;}
 .login-hint{font-size:11px;color:var(--muted);text-align:center;margin-top:8px}
-.login-err{
-  background:var(--danger-lt);color:var(--danger);
-  border-radius:var(--r);padding:10px 14px;
-  font-size:13px;margin-top:12px;text-align:center;
-  border:1px solid rgba(160,58,19,0.2);
-}
+.login-err{background:var(--danger-lt);color:var(--danger);border-radius:var(--r);padding:10px 14px;font-size:13px;margin-top:12px;text-align:center;border:1px solid rgba(160,58,19,0.2);}
 
-/* ══════════════════════════════════════
-   APP SHELL
-══════════════════════════════════════ */
+/* APP SHELL */
 #app{display:none;min-height:100vh;min-height:100dvh;flex-direction:column}
-
-/* ── Top bar (desktop) ── */
-.topbar{
-  position:sticky;top:0;z-index:100;
-  background:var(--pri);
-  height:var(--top-h);
-  display:flex;align-items:center;
-  padding:0 20px;
-  gap:12px;
-  box-shadow:0 2px 8px rgba(27,60,83,0.2);
-}
-.topbar-brand{
-  display:flex;align-items:center;gap:10px;
-  cursor:pointer;flex-shrink:0;
-  text-decoration:none;
-}
-.topbar-logo{
-  width:36px;height:36px;
-  background:var(--acc);
-  border-radius:9px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:800;color:#fff;
-  letter-spacing:.5px;flex-shrink:0;
-}
-.topbar-name{
-  font-size:14px;font-weight:700;color:#fff;
-  white-space:nowrap;
-}
+.topbar{position:sticky;top:0;z-index:100;background:var(--pri);height:var(--top-h);display:flex;align-items:center;padding:0 20px;gap:12px;box-shadow:0 2px 8px rgba(27,60,83,0.2);}
+.topbar-brand{display:flex;align-items:center;gap:10px;cursor:pointer;flex-shrink:0;text-decoration:none;}
+.topbar-logo{width:36px;height:36px;background:var(--acc);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;letter-spacing:.5px;flex-shrink:0;}
+.topbar-name{font-size:14px;font-weight:700;color:#fff;white-space:nowrap;}
 .topbar-name span{font-weight:400;color:rgba(255,255,255,.55);font-size:11px;display:block}
-
-/* ── Tab nav (desktop top, mobile bottom) ── */
-.tab-nav{
-  display:flex;align-items:center;gap:2px;
-  flex:1;
-  overflow-x:auto;
-  scrollbar-width:none;
-  padding:0 4px;
-}
+.tab-nav{display:flex;align-items:center;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none;padding:0 4px;}
 .tab-nav::-webkit-scrollbar{display:none}
-.tab-item{
-  display:flex;align-items:center;gap:6px;
-  padding:8px 14px;
-  border-radius:8px;
-  color:rgba(255,255,255,.6);
-  cursor:pointer;
-  font-size:13px;font-weight:500;
-  white-space:nowrap;
-  transition:all .15s;
-  user-select:none;
-  border:none;background:transparent;
-  text-decoration:none;
-}
+.tab-item{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;color:rgba(255,255,255,.6);cursor:pointer;font-size:13px;font-weight:500;white-space:nowrap;transition:all .15s;user-select:none;border:none;background:transparent;text-decoration:none;}
 .tab-item:hover{color:#fff;background:rgba(255,255,255,.1)}
-.tab-item.active{color:#fff;background:rgba(233,118,43,.25);
-  border:1px solid rgba(233,118,43,.4)}
+.tab-item.active{color:#fff;background:rgba(233,118,43,.25);border:1px solid rgba(233,118,43,.4)}
 .tab-item .tab-icon{font-size:16px}
-
-.topbar-end{
-  display:flex;align-items:center;gap:8px;flex-shrink:0;margin-left:auto
-}
-.user-chip{
-  display:flex;align-items:center;gap:7px;
-  background:rgba(255,255,255,.1);
-  border-radius:8px;
-  padding:6px 12px;
-  cursor:pointer;
-  transition:background .15s;
-  border:1px solid rgba(255,255,255,.12);
-}
+.topbar-end{display:flex;align-items:center;gap:8px;flex-shrink:0;margin-left:auto}
+.user-chip{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.1);border-radius:8px;padding:6px 12px;cursor:pointer;transition:background .15s;border:1px solid rgba(255,255,255,.12);}
 .user-chip:hover{background:rgba(255,255,255,.18)}
 .user-dot{width:7px;height:7px;border-radius:50%;background:var(--acc);flex-shrink:0}
 .user-label{font-size:12px;font-weight:500;color:#fff}
 .logout-icon{font-size:14px;color:rgba(255,255,255,.5)}
-
-/* ── Offline bar ── */
-#offline-bar{
-  background:var(--danger);color:#fff;
-  text-align:center;padding:7px 16px;
-  font-size:12px;font-weight:500;display:none;
-}
-
-/* ── Page wrap ── */
-.page-wrap{
-  flex:1;
-  overflow-y:auto;
-  padding:20px 20px 100px;/* bottom padding for mobile nav */
-  max-width:1100px;
-  margin:0 auto;
-  width:100%;
-}
-
-/* ── Bottom nav (mobile only) ── */
-.bottom-nav{
-  display:none;
-  position:fixed;bottom:0;left:0;right:0;z-index:200;
-  background:var(--pri);
-  padding:8px 0 max(8px,env(safe-area-inset-bottom));
-  box-shadow:0 -2px 12px rgba(27,60,83,0.2);
-}
+#offline-bar{background:var(--danger);color:#fff;text-align:center;padding:7px 16px;font-size:12px;font-weight:500;display:none;}
+.page-wrap{flex:1;overflow-y:auto;padding:20px 20px 100px;max-width:1100px;margin:0 auto;width:100%;}
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--pri);padding:8px 0 max(8px,env(safe-area-inset-bottom));box-shadow:0 -2px 12px rgba(27,60,83,0.2);}
 .bottom-nav-inner{display:flex;align-items:center;justify-content:space-around}
-.bnav-item{
-  display:flex;flex-direction:column;align-items:center;gap:3px;
-  padding:4px 12px;
-  color:rgba(255,255,255,.5);
-  cursor:pointer;
-  font-size:10px;font-weight:500;
-  transition:color .15s;
-  background:none;border:none;
-  min-width:48px;
-}
+.bnav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 12px;color:rgba(255,255,255,.5);cursor:pointer;font-size:10px;font-weight:500;transition:color .15s;background:none;border:none;min-width:48px;}
 .bnav-item.active{color:var(--acc)}
 .bnav-item .bicon{font-size:20px}
-
-/* Floating pay button */
-#fab{
-  position:fixed;bottom:80px;right:20px;z-index:300;
-  width:52px;height:52px;
-  background:var(--acc);
-  border-radius:50%;
-  display:none;
-  align-items:center;justify-content:center;
-  font-size:24px;
-  box-shadow:0 4px 16px rgba(233,118,43,.4);
-  cursor:pointer;border:none;color:#fff;
-  transition:transform .15s,box-shadow .15s;
-}
+#fab{position:fixed;bottom:80px;right:20px;z-index:300;width:52px;height:52px;background:var(--acc);border-radius:50%;display:none;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 16px rgba(233,118,43,.4);cursor:pointer;border:none;color:#fff;transition:transform .15s,box-shadow .15s;}
 #fab:active{transform:scale(.94)}
-#fab-desktop{
-  position:fixed;bottom:28px;right:28px;z-index:300;
-  display:none;
-  align-items:center;gap:8px;
-  background:var(--acc);
-  border-radius:28px;
-  padding:12px 20px;
-  font-size:14px;font-weight:600;color:#fff;
-  box-shadow:0 4px 20px rgba(233,118,43,.35);
-  cursor:pointer;border:none;
-  transition:transform .15s,box-shadow .15s;
-}
+#fab-desktop{position:fixed;bottom:28px;right:28px;z-index:300;display:none;align-items:center;gap:8px;background:var(--acc);border-radius:28px;padding:12px 20px;font-size:14px;font-weight:600;color:#fff;box-shadow:0 4px 20px rgba(233,118,43,.35);cursor:pointer;border:none;transition:transform .15s,box-shadow .15s;}
 #fab-desktop:active{transform:scale(.97)}
 
-/* ══════════════════════════════════════
-   CARDS & SURFACES
-══════════════════════════════════════ */
-.card{
-  background:var(--surface);
-  border:1px solid var(--border-lt);
-  border-radius:var(--r-lg);
-  padding:20px;
-  margin-bottom:14px;
-  box-shadow:var(--shadow);
-}
-.card-cream{
-  background:var(--card-lt);
-  border-color:var(--border);
-}
-.card-title{
-  font-size:13px;font-weight:700;color:var(--pri);
-  margin-bottom:16px;
-  display:flex;align-items:center;gap:8px;
-  text-transform:uppercase;letter-spacing:.06em;
-}
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border-lt);border-radius:var(--r-lg);padding:20px;margin-bottom:14px;box-shadow:var(--shadow);}
+.card-cream{background:var(--card-lt);border-color:var(--border);}
+.card-title{font-size:13px;font-weight:700;color:var(--pri);margin-bottom:16px;display:flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:.06em;}
 .card-title-icon{font-size:16px}
-.section-label{
-  font-size:10px;font-weight:700;color:var(--muted);
-  text-transform:uppercase;letter-spacing:.1em;
-  margin-bottom:10px;
-}
+.section-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;}
 .divider{height:1px;background:var(--border-lt);margin:14px 0}
 
-/* ══════════════════════════════════════
-   KPI STRIP
-══════════════════════════════════════ */
-.kpi-strip{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  margin-bottom:16px;
-}
-.kpi{
-  background:var(--surface);
-  border:1px solid var(--border-lt);
-  border-radius:var(--r-lg);
-  padding:16px;
-  position:relative;
-  overflow:hidden;
-  box-shadow:var(--shadow);
-}
-.kpi::after{
-  content:'';
-  position:absolute;bottom:0;left:0;right:0;height:3px;
-  background:var(--kpi-bar,var(--border));
-}
-.kpi-label{font-size:10px;font-weight:700;color:var(--muted);
-  text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+/* KPI */
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;}
+.kpi{background:var(--surface);border:1px solid var(--border-lt);border-radius:var(--r-lg);padding:16px;position:relative;overflow:hidden;box-shadow:var(--shadow);}
+.kpi::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--kpi-bar,var(--border));}
+.kpi-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
 .kpi-val{font-size:28px;font-weight:700;line-height:1;color:var(--kpi-color,var(--text))}
 .kpi-sub{font-size:11px;color:var(--muted);margin-top:6px}
 
-/* ══════════════════════════════════════
-   PILLS & BADGES
-══════════════════════════════════════ */
-.pill{
-  display:inline-flex;align-items:center;
-  font-size:11px;font-weight:600;
-  padding:3px 9px;border-radius:20px;white-space:nowrap;
-}
+/* PILLS */
+.pill{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;white-space:nowrap;}
 .pill-ok{background:var(--ok-lt);color:var(--ok)}
 .pill-danger{background:var(--danger-lt);color:var(--danger)}
 .pill-acc{background:var(--acc-lt);color:var(--acc)}
 .pill-pri{background:var(--pri-lt);color:var(--pri)}
 .pill-muted{background:var(--card);color:var(--muted)}
-.overdue-badge{
-  background:var(--danger);color:#fff;
-  font-size:10px;font-weight:700;
-  padding:2px 7px;border-radius:20px;
-  white-space:nowrap;
-}
+.overdue-badge{background:var(--danger);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap;}
 
-/* ══════════════════════════════════════
-   BUTTONS
-══════════════════════════════════════ */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  gap:6px;padding:9px 18px;
-  border-radius:var(--r);
-  font-size:13px;font-weight:600;
-  cursor:pointer;
-  border:1.5px solid var(--border);
-  background:var(--surface);color:var(--text);
-  transition:all .15s;white-space:nowrap;
-  text-decoration:none;
-}
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 18px;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--text);transition:all .15s;white-space:nowrap;text-decoration:none;}
 .btn:hover{background:var(--bg);border-color:var(--muted)}
 .btn:active{transform:scale(.97)}
-.btn-primary{
-  background:var(--pri);color:#fff;border-color:var(--pri);
-}
+.btn-primary{background:var(--pri);color:#fff;border-color:var(--pri);}
 .btn-primary:hover{background:var(--pri-dk);border-color:var(--pri-dk)}
-.btn-acc{
-  background:var(--acc);color:#fff;border-color:var(--acc);
-}
+.btn-acc{background:var(--acc);color:#fff;border-color:var(--acc);}
 .btn-acc:hover{background:#D66820;border-color:#D66820}
 .btn-danger{background:var(--danger);color:#fff;border-color:var(--danger)}
 .btn-danger:hover{background:#8A2F0F}
-.btn-ghost{
-  background:transparent;border-color:transparent;color:var(--muted);
-}
+.btn-ghost{background:transparent;border-color:transparent;color:var(--muted);}
 .btn-ghost:hover{background:var(--bg);color:var(--text)}
 .btn-sm{padding:6px 12px;font-size:12px}
 .btn-xs{padding:4px 9px;font-size:11px}
 .btn-icon{padding:7px;border-radius:8px}
 .btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
 
-/* ══════════════════════════════════════
-   FORMS
-══════════════════════════════════════ */
+/* FORMS */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .form-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
 .form-full{grid-column:1/-1}
 .form-group{display:flex;flex-direction:column;gap:5px}
 label{font-size:12px;font-weight:600;color:var(--pri)}
 .req{color:var(--danger)}
-input,select,textarea{
-  font-size:14px;padding:10px 13px;
-  border-radius:var(--r);
-  border:1.5px solid var(--border);
-  background:var(--surface);
-  color:var(--text);width:100%;
-  transition:border-color .15s,box-shadow .15s;
-  -webkit-appearance:none;
-}
-input:focus,select:focus,textarea:focus{
-  outline:none;border-color:var(--pri);
-  box-shadow:0 0 0 3px rgba(27,60,83,0.1);
-}
+input,select,textarea{font-size:14px;padding:10px 13px;border-radius:var(--r);border:1.5px solid var(--border);background:var(--surface);color:var(--text);width:100%;transition:border-color .15s,box-shadow .15s;-webkit-appearance:none;}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px rgba(27,60,83,0.1);}
 input.hi{background:var(--pri-lt);border-color:var(--sage)}
 select{cursor:pointer}
 textarea{resize:vertical;min-height:80px}
-
-/* Live search dropdown */
 .live-search-wrap{position:relative}
 .live-search-input{width:100%}
-.live-search-dropdown{
-  position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:500;
-  background:var(--surface);
-  border:1.5px solid var(--border);
-  border-radius:var(--r);
-  box-shadow:var(--shadow-md);
-  max-height:220px;overflow-y:auto;
-}
-.lsd-item{
-  padding:10px 13px;cursor:pointer;
-  font-size:13px;
-  border-bottom:1px solid var(--border-lt);
-  transition:background .1s;
-}
+.live-search-dropdown{position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:500;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow-md);max-height:220px;overflow-y:auto;}
+.lsd-item{padding:10px 13px;cursor:pointer;font-size:13px;border-bottom:1px solid var(--border-lt);transition:background .1s;}
 .lsd-item:last-child{border-bottom:none}
 .lsd-item:hover,.lsd-item.focused{background:var(--pri-lt)}
 .lsd-code{font-weight:700;color:var(--pri);font-size:12px}
 
-/* ══════════════════════════════════════
-   TABLES
-══════════════════════════════════════ */
-.table-wrap{
-  overflow-x:auto;
-  border-radius:var(--r-lg);
-  border:1px solid var(--border-lt);
-}
+/* TABLES */
+.table-wrap{overflow-x:auto;border-radius:var(--r-lg);border:1px solid var(--border-lt);}
 table{width:100%;border-collapse:collapse;font-size:13px}
-th{
-  text-align:left;padding:10px 14px;
-  font-size:10px;font-weight:700;color:var(--muted);
-  background:var(--bg);
-  border-bottom:1px solid var(--border-lt);
-  white-space:nowrap;
-  text-transform:uppercase;letter-spacing:.06em;
-}
-td{
-  padding:11px 14px;
-  border-bottom:1px solid var(--border-lt);
-  vertical-align:middle;color:var(--text);
-}
+th{text-align:left;padding:10px 14px;font-size:10px;font-weight:700;color:var(--muted);background:var(--bg);border-bottom:1px solid var(--border-lt);white-space:nowrap;text-transform:uppercase;letter-spacing:.06em;}
+td{padding:11px 14px;border-bottom:1px solid var(--border-lt);vertical-align:middle;color:var(--text);}
 tr:last-child td{border-bottom:none}
 tbody tr:hover td{background:rgba(161,194,189,.08)}
 
-/* ══════════════════════════════════════
-   SEARCH BAR
-══════════════════════════════════════ */
-.search-bar{
-  display:flex;align-items:center;gap:10px;
-  background:var(--surface);
-  border:1.5px solid var(--border);
-  border-radius:var(--r);
-  padding:10px 14px;
-  margin-bottom:14px;
-  transition:border-color .15s,box-shadow .15s;
-}
-.search-bar:focus-within{
-  border-color:var(--pri);
-  box-shadow:0 0 0 3px rgba(27,60,83,0.08);
-}
-.search-bar input{
-  border:none;background:transparent;padding:0;font-size:14px;
-  flex:1;min-width:0;
-}
+/* SEARCH BAR */
+.search-bar{display:flex;align-items:center;gap:10px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:10px 14px;margin-bottom:14px;transition:border-color .15s,box-shadow .15s;}
+.search-bar:focus-within{border-color:var(--pri);box-shadow:0 0 0 3px rgba(27,60,83,0.08);}
+.search-bar input{border:none;background:transparent;padding:0;font-size:14px;flex:1;min-width:0;}
 .search-bar input:focus{outline:none;box-shadow:none}
 .search-icon{font-size:18px;color:var(--muted);flex-shrink:0}
 
-/* ══════════════════════════════════════
-   MEMBER CARDS
-══════════════════════════════════════ */
-.member-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-  gap:14px;
-}
-.member-card{
-  background:var(--surface);
-  border:1.5px solid var(--border-lt);
-  border-radius:var(--r-lg);
-  padding:16px;
-  cursor:pointer;
-  transition:border-color .15s,box-shadow .15s,transform .1s;
-  box-shadow:var(--shadow);
-}
-.member-card:hover{
-  border-color:var(--sage);
-  box-shadow:var(--shadow-md);
-  transform:translateY(-1px);
-}
+/* MEMBER CARDS */
+.member-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
+.member-card{background:var(--surface);border:1.5px solid var(--border-lt);border-radius:var(--r-lg);padding:16px;cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .1s;box-shadow:var(--shadow);}
+.member-card:hover{border-color:var(--sage);box-shadow:var(--shadow-md);transform:translateY(-1px);}
 .mc-top{display:flex;align-items:flex-start;gap:12px}
-.mc-avatar{
-  width:44px;height:44px;border-radius:50%;
-  background:var(--pri-lt);
-  display:flex;align-items:center;justify-content:center;
-  font-size:15px;font-weight:700;color:var(--pri);
-  flex-shrink:0;
-}
+.mc-avatar{width:44px;height:44px;border-radius:50%;background:var(--pri-lt);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:var(--pri);flex-shrink:0;}
 .mc-name{font-size:14px;font-weight:700;color:var(--pri)}
 .mc-meta{font-size:11px;color:var(--muted);margin-top:2px}
 .mc-badges{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
-.mc-bottom{
-  margin-top:14px;
-  display:flex;align-items:center;justify-content:space-between;
-}
+.mc-bottom{margin-top:14px;display:flex;align-items:center;justify-content:space-between;}
 .mc-pending-label{font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase}
 .mc-pending-val{font-size:18px;font-weight:700}
-
-/* Progress ring */
 .ring-wrap{position:relative;flex-shrink:0}
-.ring-text{
-  position:absolute;inset:0;display:flex;align-items:center;
-  justify-content:center;font-size:9px;font-weight:700;color:var(--pri);
-}
+.ring-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--pri);}
 
-/* ══════════════════════════════════════
-   PROFILE VIEW
-══════════════════════════════════════ */
-.profile-header{
-  background:var(--pri);
-  border-radius:var(--r-xl);
-  padding:24px;
-  color:#fff;
-  margin-bottom:14px;
-  position:relative;overflow:hidden;
-}
-.profile-header::before{
-  content:'';
-  position:absolute;top:-30px;right:-30px;
-  width:140px;height:140px;
-  border-radius:50%;
-  background:rgba(233,118,43,.15);
-}
+/* PROFILE */
+.profile-header{background:var(--pri);border-radius:var(--r-xl);padding:24px;color:#fff;margin-bottom:14px;position:relative;overflow:hidden;}
+.profile-header::before{content:'';position:absolute;top:-30px;right:-30px;width:140px;height:140px;border-radius:50%;background:rgba(233,118,43,.15);}
 .ph-top{display:flex;align-items:flex-start;gap:16px}
-.ph-avatar{
-  width:56px;height:56px;border-radius:50%;
-  background:rgba(255,255,255,.15);
-  display:flex;align-items:center;justify-content:center;
-  font-size:20px;font-weight:700;color:#fff;
-  flex-shrink:0;border:2px solid rgba(255,255,255,.3);
-}
+.ph-avatar{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;border:2px solid rgba(255,255,255,.3);}
 .ph-name{font-size:18px;font-weight:700;line-height:1.2}
 .ph-meta{font-size:12px;color:rgba(255,255,255,.7);margin-top:4px}
-.ph-strip{
-  display:flex;gap:20px;
-  margin-top:20px;
-  padding-top:16px;
-  border-top:1px solid rgba(255,255,255,.15);
-  flex-wrap:wrap;
-}
+.ph-strip{display:flex;gap:20px;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.15);flex-wrap:wrap;}
 .ph-stat{min-width:80px}
 .ph-stat-label{font-size:10px;color:rgba(255,255,255,.6);font-weight:600;text-transform:uppercase}
 .ph-stat-val{font-size:20px;font-weight:700;color:#fff}
 .ph-stat-val.ok{color:#8EC9A0}
 .ph-stat-val.danger{color:#FFAA88}
 .ph-stat-val.acc{color:#FFCC99}
-
-/* Year accordion */
 .year-section{margin-bottom:10px}
-.year-toggle{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:12px 16px;
-  background:var(--card-lt);
-  border-radius:var(--r);
-  cursor:pointer;
-  border:1.5px solid var(--border);
-  user-select:none;
-  transition:background .15s;
-}
+.year-toggle{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--card-lt);border-radius:var(--r);cursor:pointer;border:1.5px solid var(--border);user-select:none;transition:background .15s;}
 .year-toggle:hover{background:var(--card)}
 .year-toggle-title{font-size:14px;font-weight:700;color:var(--pri)}
 .year-toggle-arrow{font-size:12px;color:var(--muted);transition:transform .2s}
 .year-toggle.open .year-toggle-arrow{transform:rotate(180deg)}
-.year-body{
-  display:none;
-  padding:14px;
-  border:1.5px solid var(--border);
-  border-top:none;
-  border-radius:0 0 var(--r) var(--r);
-  background:var(--surface);
-}
+.year-body{display:none;padding:14px;border:1.5px solid var(--border);border-top:none;border-radius:0 0 var(--r) var(--r);background:var(--surface);}
 .year-body.open{display:block}
-
-/* Month grid */
 .month-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
-.month-cell{
-  text-align:center;padding:8px 4px;
-  border-radius:8px;font-size:11px;font-weight:600;
-  border:1.5px solid transparent;cursor:default;
-}
+.month-cell{text-align:center;padding:8px 4px;border-radius:8px;font-size:11px;font-weight:600;border:1.5px solid transparent;cursor:default;}
 .mc-paid{background:var(--ok-lt);color:var(--ok);border-color:rgba(93,134,108,.2)}
 .mc-unpaid{background:var(--danger-lt);color:var(--danger);border-color:rgba(160,58,19,.15)}
 .mc-na{background:var(--bg);color:var(--muted)}
 .month-cell-lbl{font-size:9px;color:var(--muted);text-align:center;margin-top:2px}
 
-/* ══════════════════════════════════════
-   PAYMENT HISTORY ITEMS
-══════════════════════════════════════ */
-.pay-item{
-  display:flex;align-items:center;gap:12px;
-  padding:11px 0;
-  border-bottom:1px solid var(--border-lt);
-}
+/* PAYMENT ITEMS */
+.pay-item{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border-lt);}
 .pay-item:last-child{border-bottom:none}
-.pay-icon{
-  width:36px;height:36px;border-radius:9px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:16px;flex-shrink:0;
-}
+.pay-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
 .pi-fee{background:var(--pri-lt)}
 .pi-don{background:var(--acc-lt)}
 .pay-info{flex:1;min-width:0}
 .pay-receipt{font-size:12px;font-weight:700;color:var(--pri)}
-.pay-detail{font-size:11px;color:var(--muted);margin-top:1px;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pay-detail{font-size:11px;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pay-amount{font-size:15px;font-weight:700;flex-shrink:0}
-.timer-pill{
-  font-size:10px;font-weight:600;
-  padding:2px 7px;border-radius:20px;
-  background:var(--acc-lt);color:var(--acc);
-  margin-left:6px;
-}
+.timer-pill{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;background:var(--acc-lt);color:var(--acc);margin-left:6px;}
 
-/* ══════════════════════════════════════
-   HOME / ALERTS
-══════════════════════════════════════ */
-.alert-item{
-  display:flex;align-items:flex-start;gap:12px;
-  padding:12px;
-  border-radius:var(--r);
-  margin-bottom:8px;
-  cursor:pointer;
-  transition:background .12s;
-}
+/* HOME / ALERTS */
+.alert-item{display:flex;align-items:flex-start;gap:12px;padding:12px;border-radius:var(--r);margin-bottom:8px;cursor:pointer;transition:background .12s;}
 .alert-item:hover{background:var(--bg)}
-.alert-dot{
-  width:34px;height:34px;border-radius:9px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:16px;flex-shrink:0;
-}
+.alert-dot{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
 .ad-warn{background:var(--danger-lt)}
 .ad-ok{background:var(--ok-lt)}
 .ad-info{background:var(--pri-lt)}
@@ -661,146 +227,55 @@ tbody tr:hover td{background:rgba(161,194,189,.08)}
 .alert-title{font-size:13px;font-weight:600;color:var(--text)}
 .alert-sub{font-size:11px;color:var(--muted);margin-top:2px}
 
-/* ══════════════════════════════════════
-   CITY FILTER CHIPS
-══════════════════════════════════════ */
+/* CHIPS */
 .chip-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
-.chip{
-  padding:5px 13px;border-radius:20px;
-  font-size:12px;font-weight:600;
-  cursor:pointer;border:1.5px solid var(--border);
-  background:var(--surface);color:var(--muted);
-  transition:all .12s;user-select:none;
-}
-.chip.active{
-  background:var(--pri);color:#fff;border-color:var(--pri);
-}
+.chip{padding:5px 13px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);transition:all .12s;user-select:none;}
+.chip.active{background:var(--pri);color:#fff;border-color:var(--pri);}
 .chip:hover:not(.active){background:var(--bg);border-color:var(--sage)}
 
-/* ══════════════════════════════════════
-   RECEIPT
-══════════════════════════════════════ */
-.receipt-box{
-  background:var(--bg);
-  border:1.5px solid var(--border);
-  border-radius:var(--r);
-  padding:16px;
-  font-size:12px;
-  font-family:'Courier New',monospace;
-  white-space:pre-wrap;
-  max-height:280px;overflow-y:auto;
-  color:var(--text);
-  line-height:1.8;
-}
+/* RECEIPT */
+.receipt-box{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:16px;font-size:12px;font-family:'Courier New',monospace;white-space:pre-wrap;max-height:280px;overflow-y:auto;color:var(--text);line-height:1.8;}
 
-/* ══════════════════════════════════════
-   MODAL
-══════════════════════════════════════ */
-.modal-backdrop{
-  position:fixed;inset:0;
-  background:rgba(27,60,83,0.5);
-  z-index:1000;
-  display:flex;align-items:center;justify-content:center;
-  padding:16px;
-  backdrop-filter:blur(2px);
-}
-.modal{
-  background:var(--surface);
-  border-radius:var(--r-xl);
-  width:100%;max-width:560px;
-  max-height:92vh;overflow-y:auto;
-  box-shadow:var(--shadow-lg);
-}
-.modal-hdr{
-  padding:20px 24px 0;
-  display:flex;align-items:center;justify-content:space-between;
-}
+/* MODAL */
+.modal-backdrop{position:fixed;inset:0;background:rgba(27,60,83,0.5);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(2px);}
+.modal{background:var(--surface);border-radius:var(--r-xl);width:100%;max-width:560px;max-height:92vh;overflow-y:auto;box-shadow:var(--shadow-lg);}
+.modal-hdr{padding:20px 24px 0;display:flex;align-items:center;justify-content:space-between;}
 .modal-title{font-size:16px;font-weight:700;color:var(--pri)}
-.modal-close{
-  font-size:20px;cursor:pointer;color:var(--muted);
-  background:none;border:none;line-height:1;padding:4px;
-  border-radius:6px;
-  transition:background .12s;
-}
+.modal-close{font-size:20px;cursor:pointer;color:var(--muted);background:none;border:none;line-height:1;padding:4px;border-radius:6px;transition:background .12s;}
 .modal-close:hover{background:var(--bg)}
 .modal-body{padding:20px 24px}
-.modal-foot{
-  padding:0 24px 20px;
-  display:flex;justify-content:flex-end;gap:10px;
-}
+.modal-foot{padding:0 24px 20px;display:flex;justify-content:flex-end;gap:10px;}
 
-/* ══════════════════════════════════════
-   TOAST
-══════════════════════════════════════ */
-#toast{
-  position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);
-  background:var(--pri);color:#fff;
-  padding:11px 20px;border-radius:var(--r);
-  font-size:13px;font-weight:600;
-  box-shadow:var(--shadow-md);z-index:9999;
-  opacity:0;transition:all .25s;pointer-events:none;
-  white-space:nowrap;
-}
+/* TOAST */
+#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--pri);color:#fff;padding:11px 20px;border-radius:var(--r);font-size:13px;font-weight:600;box-shadow:var(--shadow-md);z-index:9999;opacity:0;transition:all .25s;pointer-events:none;white-space:nowrap;}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 #toast.t-ok{background:var(--ok)}
 #toast.t-err{background:var(--danger)}
 
-/* ══════════════════════════════════════
-   LOADING
-══════════════════════════════════════ */
-.spinner{
-  width:18px;height:18px;
-  border:2px solid rgba(255,255,255,.3);
-  border-top-color:#fff;
-  border-radius:50%;
-  animation:spin .7s linear infinite;
-  display:inline-block;flex-shrink:0;
-}
+/* LOADING */
+.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;flex-shrink:0;}
 .spinner-dark{border-color:rgba(27,60,83,.15);border-top-color:var(--pri)}
 @keyframes spin{to{transform:rotate(360deg)}}
-.page-loader{
-  display:flex;align-items:center;justify-content:center;
-  padding:60px 20px;flex-direction:column;gap:14px;
-  color:var(--muted);font-size:13px;
-}
-
-/* Empty state */
+.page-loader{display:flex;align-items:center;justify-content:center;padding:60px 20px;flex-direction:column;gap:14px;color:var(--muted);font-size:13px;}
 .empty-state{text-align:center;padding:40px 20px;color:var(--muted)}
 .empty-icon{font-size:36px;margin-bottom:10px}
 .empty-text{font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px}
 .empty-sub{font-size:12px}
 
-/* ══════════════════════════════════════
-   PAGE HEADERS
-══════════════════════════════════════ */
-.page-hdr{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:16px;flex-wrap:wrap;gap:10px;
-}
+/* PAGE HEADERS */
+.page-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
 .page-hdr-title{font-size:18px;font-weight:700;color:var(--pri)}
 .page-hdr-sub{font-size:12px;color:var(--muted);margin-top:2px}
 
-/* Bar chart */
+/* BAR CHART */
 .bar-chart{display:flex;align-items:flex-end;gap:6px;height:80px;padding-top:4px}
 .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
-.bar{
-  border-radius:4px 4px 0 0;width:100%;
-  background:var(--pri-lt);
-  transition:height .3s;cursor:default;min-height:2px;
-}
+.bar{border-radius:4px 4px 0 0;width:100%;background:var(--pri-lt);transition:height .3s;cursor:default;min-height:2px;}
 .bar:hover{background:var(--pri)}
 .bar-lbl{font-size:9px;color:var(--muted)}
 
-/* Collection strip */
-.coll-strip{
-  background:var(--pri);
-  border-radius:var(--r-lg);
-  padding:14px 20px;
-  display:flex;align-items:center;gap:24px;
-  margin-bottom:16px;
-  flex-wrap:wrap;
-  box-shadow:var(--shadow-md);
-}
+/* COLLECTION STRIP */
+.coll-strip{background:var(--pri);border-radius:var(--r-lg);padding:14px 20px;display:flex;align-items:center;gap:24px;margin-bottom:16px;flex-wrap:wrap;box-shadow:var(--shadow-md);}
 .cs-item{flex:1;min-width:100px}
 .cs-label{font-size:10px;color:rgba(255,255,255,.6);font-weight:600;text-transform:uppercase}
 .cs-val{font-size:20px;font-weight:700;color:#fff}
@@ -808,25 +283,19 @@ tbody tr:hover td{background:rgba(161,194,189,.08)}
 .cs-val.ok{color:#8EC9A0}
 .cs-val.danger{color:#FFAA88}
 
-/* ══════════════════════════════════════
-   RESPONSIVE
-══════════════════════════════════════ */
+/* RESPONSIVE */
 @media(min-width:769px){
   #fab{display:none!important}
   #fab-desktop{display:flex}
   .topbar-name span{display:block}
 }
-
 @media(max-width:768px){
-  /* Mobile: hide desktop tab nav text on small, show bottom nav */
   .tab-nav{display:none}
   .topbar-end .user-label{display:none}
   .bottom-nav{display:block}
   #fab{display:flex}
   #fab-desktop{display:none!important}
-
   .page-wrap{padding:16px 14px 90px}
-
   .kpi-strip{grid-template-columns:1fr 1fr}
   .form-grid{grid-template-columns:1fr}
   .form-grid-3{grid-template-columns:1fr 1fr}
@@ -837,7 +306,6 @@ tbody tr:hover td{background:rgba(161,194,189,.08)}
   #toast{bottom:76px}
   .modal-backdrop{padding:10px}
 }
-
 @media(max-width:400px){
   .kpi-strip{grid-template-columns:1fr 1fr}
   .month-grid{grid-template-columns:repeat(3,1fr)}
@@ -847,7 +315,7 @@ tbody tr:hover td{background:rgba(161,194,189,.08)}
 </head>
 <body>
 
-<!-- ═══════════ LOGIN ═══════════ -->
+<!-- LOGIN -->
 <div id="login-screen">
   <div class="login-card">
     <div class="login-top">
@@ -869,47 +337,23 @@ tbody tr:hover td{background:rgba(161,194,189,.08)}
   </div>
 </div>
 
-<!-- ═══════════ APP ═══════════ -->
+<!-- APP -->
 <div id="app" style="display:none;flex-direction:column;min-height:100vh;min-height:100dvh">
-
-  <!-- Offline -->
   <div id="offline-bar">⚠️ No internet connection — changes will not be saved</div>
-
-  <!-- Top bar -->
   <header class="topbar">
     <div class="topbar-brand" onclick="navigate('home')">
       <div class="topbar-logo">UDC</div>
-      <div class="topbar-name">
-        Udyawar Dammam
-        <span>Membership System</span>
-      </div>
+      <div class="topbar-name">Udyawar Dammam<span>Membership System</span></div>
     </div>
-
-    <!-- Desktop tab nav -->
     <nav class="tab-nav" id="tab-nav">
-      <button class="tab-item" data-page="home" onclick="navigate('home')">
-        <span class="tab-icon">🏠</span> Home
-      </button>
-      <button class="tab-item" data-page="payment" id="tnav-payment" onclick="navigate('payment')">
-        <span class="tab-icon">💳</span> Payment Entry
-      </button>
-      <button class="tab-item" data-page="members" id="tnav-members" onclick="navigate('members')">
-        <span class="tab-icon">👥</span> Members
-      </button>
-      <button class="tab-item" data-page="search" onclick="navigate('search')">
-        <span class="tab-icon">🔍</span> Member Search
-      </button>
-      <button class="tab-item" data-page="monthly" onclick="navigate('monthly')">
-        <span class="tab-icon">📅</span> Monthly Report
-      </button>
-      <button class="tab-item hidden" data-page="audit" id="tnav-audit" onclick="navigate('audit')">
-        <span class="tab-icon">📋</span> Audit Log
-      </button>
-      <button class="tab-item hidden" data-page="settings" id="tnav-settings" onclick="navigate('settings')">
-        <span class="tab-icon">⚙️</span> Settings
-      </button>
+      <button class="tab-item" data-page="home" onclick="navigate('home')"><span class="tab-icon">🏠</span> Home</button>
+      <button class="tab-item" data-page="payment" id="tnav-payment" onclick="navigate('payment')"><span class="tab-icon">💳</span> Payment Entry</button>
+      <button class="tab-item" data-page="members" id="tnav-members" onclick="navigate('members')"><span class="tab-icon">👥</span> Members</button>
+      <button class="tab-item" data-page="search" onclick="navigate('search')"><span class="tab-icon">🔍</span> Member Search</button>
+      <button class="tab-item" data-page="monthly" onclick="navigate('monthly')"><span class="tab-icon">📅</span> Monthly Report</button>
+      <button class="tab-item hidden" data-page="audit" id="tnav-audit" onclick="navigate('audit')"><span class="tab-icon">📋</span> Audit Log</button>
+      <button class="tab-item hidden" data-page="settings" id="tnav-settings" onclick="navigate('settings')"><span class="tab-icon">⚙️</span> Settings</button>
     </nav>
-
     <div class="topbar-end">
       <div class="user-chip" onclick="confirmLogout()">
         <div class="user-dot"></div>
@@ -918,79 +362,49 @@ tbody tr:hover td{background:rgba(161,194,189,.08)}
       </div>
     </div>
   </header>
-
-  <!-- Page content -->
   <main class="page-wrap" id="page-wrap">
     <div class="page-loader"><div class="spinner spinner-dark"></div>Loading…</div>
   </main>
-
-  <!-- Bottom nav (mobile) -->
   <nav class="bottom-nav">
     <div class="bottom-nav-inner" id="bnav-inner">
-      <button class="bnav-item" data-page="home" onclick="navigate('home')">
-        <span class="bicon">🏠</span>Home
-      </button>
-      <button class="bnav-item" data-page="payment" id="bnav-payment" onclick="navigate('payment')">
-        <span class="bicon">💳</span>Pay
-      </button>
-      <button class="bnav-item" data-page="members" id="bnav-members" onclick="navigate('members')">
-        <span class="bicon">👥</span>Members
-      </button>
-      <button class="bnav-item" data-page="search" onclick="navigate('search')">
-        <span class="bicon">🔍</span>Search
-      </button>
-      <button class="bnav-item" data-page="monthly" onclick="navigate('monthly')">
-        <span class="bicon">📅</span>Report
-      </button>
+      <button class="bnav-item" data-page="home" onclick="navigate('home')"><span class="bicon">🏠</span>Home</button>
+      <button class="bnav-item" data-page="payment" id="bnav-payment" onclick="navigate('payment')"><span class="bicon">💳</span>Pay</button>
+      <button class="bnav-item" data-page="members" id="bnav-members" onclick="navigate('members')"><span class="bicon">👥</span>Members</button>
+      <button class="bnav-item" data-page="search" onclick="navigate('search')"><span class="bicon">🔍</span>Search</button>
+      <button class="bnav-item" data-page="monthly" onclick="navigate('monthly')"><span class="bicon">📅</span>Report</button>
     </div>
   </nav>
-
-  <!-- FAB (mobile) -->
   <button id="fab" onclick="navigate('payment')" title="New Payment">＋</button>
-
-  <!-- FAB desktop -->
-  <button id="fab-desktop" onclick="navigate('payment')">
-    <span>＋</span> New Payment
-  </button>
-
+  <button id="fab-desktop" onclick="navigate('payment')"><span>＋</span> New Payment</button>
 </div>
 
-<!-- Modal container -->
 <div id="modal-container"></div>
-
-<!-- Toast -->
 <div id="toast"></div>
 
 <script>
 // ═══════════════════════════════════════════════════════
 // CONFIG
 // ═══════════════════════════════════════════════════════
-const API_URL = "https://script.google.com/macros/s/AKfycbwVrlLp5HNs65iA8PE3frDmJSgphr9I0heKYL8yiD0Bp_IW6hmGl0hGcQIbXu6IqFG9/exec";
+const API_URL      = "https://script.google.com/macros/s/AKfycbwVrlLp5HNs65iA8PE3frDmJSgphr9I0heKYL8yiD0Bp_IW6hmGl0hGcQIbXu6IqFG9/exec";
 const SESSION_MS   = 30 * 60 * 1000;
 const EDIT_WIN_MS  = 15 * 60 * 1000;
-const MONTHS = ["January","February","March","April","May","June",
-                "July","August","September","October","November","December"];
-const CITIES = ["All","Dammam","Jubail","Khobar","Sarrar","Riyadh"];
+const MONTHS       = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const CITIES       = ["All","Dammam","Jubail","Khobar","Sarrar","Riyadh"];
+const ACTIVE_YEAR  = new Date().getFullYear(); // ← dynamic, no hardcode
 
 // ═══════════════════════════════════════════════════════
 // STATE
 // ═══════════════════════════════════════════════════════
-const S = {
-  user: null,
-  members: [],
-  page: "home",
-  sessionTimer: null,
-};
+const S = { user: null, members: [], page: "home", sessionTimer: null };
 
 // ═══════════════════════════════════════════════════════
 // API
 // ═══════════════════════════════════════════════════════
 async function api(action, data = {}) {
   try {
-    const payload = { action, ...data,
-      userRole: S.user?.role, userLabel: S.user?.label };
-    const params = new URLSearchParams({ data: JSON.stringify(payload) });
-    const res = await fetch(API_URL + "?" + params.toString());
+    const payload = { action, ...data, userRole: S.user?.role, userLabel: S.user?.label };
+    const params  = new URLSearchParams({ data: JSON.stringify(payload) });
+    const res     = await fetch(API_URL + "?" + params.toString());
     if (!res.ok) throw new Error("HTTP " + res.status);
     return await res.json();
   } catch(err) {
@@ -1031,11 +445,9 @@ async function doLogin() {
   const btn = document.getElementById("login-btn");
   const err = document.getElementById("login-err");
   if (!pin) { showLoginErr("Please enter your PIN."); return; }
-
   btn.innerHTML = '<span class="spinner"></span> Verifying…';
   btn.disabled = true;
   err.classList.add("hidden");
-
   const res = await api("login", { pin });
   if (res.ok) {
     S.user = { role: res.role, label: res.label };
@@ -1062,22 +474,17 @@ function showLoginErr(msg) {
 function applyRoleUI() {
   document.getElementById("top-role-label").textContent = S.user.label;
   const role = S.user.role;
-
-  // Hide payment + members for search-only
   if (role === "search") {
     ["tnav-payment","bnav-payment","tnav-members","bnav-members"].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.classList.add("hidden");
     });
-    // Hide FABs
     document.getElementById("fab").classList.add("hidden");
     document.getElementById("fab-desktop").classList.add("hidden");
   }
-  // Show audit + settings for admin
   if (role === "admin") {
     document.getElementById("tnav-audit").classList.remove("hidden");
     document.getElementById("tnav-settings").classList.remove("hidden");
-    // Add to bottom nav
     const bnav = document.getElementById("bnav-inner");
     const settingsBtn = document.createElement("button");
     settingsBtn.className = "bnav-item";
@@ -1088,9 +495,7 @@ function applyRoleUI() {
   }
 }
 
-function confirmLogout() {
-  if (confirm("Sign out of UDC?")) logout();
-}
+function confirmLogout() { if (confirm("Sign out of UDC?")) logout(); }
 
 function logout() {
   S.user = null;
@@ -1112,24 +517,12 @@ async function navigate(page) {
   if (role === "pe" && ["audit","settings"].includes(page)) {
     toast("Admin access required.", "err"); return;
   }
-
   S.page = page;
-
-  // Sync tab nav
-  document.querySelectorAll(".tab-item").forEach(el => {
-    el.classList.toggle("active", el.dataset.page === page);
-  });
-  // Sync bottom nav
-  document.querySelectorAll(".bnav-item").forEach(el => {
-    el.classList.toggle("active", el.dataset.page === page);
-  });
-
-  // Hide FAB on payment entry (we're already there)
+  document.querySelectorAll(".tab-item").forEach(el => el.classList.toggle("active", el.dataset.page === page));
+  document.querySelectorAll(".bnav-item").forEach(el => el.classList.toggle("active", el.dataset.page === page));
   const fab = document.getElementById("fab");
   fab.style.display = (page === "payment" || role === "search") ? "none" : "flex";
-
   setContent('<div class="page-loader"><div class="spinner spinner-dark"></div>Loading…</div>');
-
   switch(page) {
     case "home":     await renderHome();     break;
     case "payment":  await renderPayment();  break;
@@ -1153,19 +546,14 @@ async function loadMembers(force=false) {
 // ═══════════════════════════════════════════════════════
 // HELPERS
 // ═══════════════════════════════════════════════════════
-function setContent(html) {
-  document.getElementById("page-wrap").innerHTML = html;
-}
+function setContent(html) { document.getElementById("page-wrap").innerHTML = html; }
 
 function esc(s) {
   if (s == null) return "";
-  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
 
-function fmt(n) {
-  return (Number(n)||0).toLocaleString("en-US",{maximumFractionDigits:0});
-}
+function fmt(n) { return (Number(n)||0).toLocaleString("en-US",{maximumFractionDigits:0}); }
 
 function fmtDate(s) {
   if (!s) return "—";
@@ -1173,13 +561,10 @@ function fmtDate(s) {
   catch { return s; }
 }
 
-function todayISO() {
-  return new Date().toISOString().split("T")[0];
-}
+function todayISO() { return new Date().toISOString().split("T")[0]; }
 
 function calcPending(m) {
   if (m.pendingBal !== undefined) return m.pendingBal;
-  // fallback only if server didn't return pendingBal
   const ji = MONTHS.indexOf(m.joinMonth);
   const mo = ji >= 0 ? 12 - ji : 12;
   return Number(m.openingBal||0) + Number(m.fee) * mo;
@@ -1190,8 +575,6 @@ function initials(name) {
 }
 
 function getOverdueMonths(m) {
-  // rough front-end estimate: months behind
-  const ji = MONTHS.indexOf(m.joinMonth);
   const pending = calcPending(m);
   if (!m.fee || pending <= 0) return 0;
   return Math.round(pending / Number(m.fee));
@@ -1209,10 +592,9 @@ async function renderHome() {
   const now = new Date();
   const curMonth = MONTHS[now.getMonth()];
 
-  // Build alerts
-  const overdue = S.members.filter(m => m.status === "Active" && getOverdueMonths(m) >= 2);
+  const overdue   = S.members.filter(m => m.status === "Active" && getOverdueMonths(m) >= 2);
   const noContact = S.members.filter(m => m.status === "Active" && !m.contact);
-  const alerts = [];
+  const alerts    = [];
   if (overdue.length)
     alerts.push({icon:"⚠️",cls:"ad-warn",title:`${overdue.length} member${overdue.length>1?"s are":" is"} 2+ months overdue`,sub:"Tap to view unpaid members",action:"navigate('monthly')"});
   if (noContact.length)
@@ -1225,31 +607,16 @@ async function renderHome() {
 <div class="page-hdr">
   <div>
     <div class="page-hdr-title">Good ${greeting()}, ${S.user.label}</div>
-    <div class="page-hdr-sub">${new Date().toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"})}</div>
+    <div class="page-hdr-sub">${now.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"})}</div>
   </div>
 </div>
 
 <div class="coll-strip">
-  <div class="cs-item">
-    <div class="cs-label">Total Collected</div>
-    <div class="cs-val acc">${fmt(k.grandTotal)}</div>
-  </div>
-  <div class="cs-item">
-    <div class="cs-label">Fees YTD</div>
-    <div class="cs-val ok">${fmt(k.totalFees)}</div>
-  </div>
-  <div class="cs-item">
-    <div class="cs-label">Donations</div>
-    <div class="cs-val">${fmt(k.totalDonations)}</div>
-  </div>
-  <div class="cs-item">
-    <div class="cs-label">Outstanding</div>
-    <div class="cs-val danger">${fmt(k.totalPending)}</div>
-  </div>
-  <div class="cs-item">
-    <div class="cs-label">Active Members</div>
-    <div class="cs-val">${k.activeMembers}</div>
-  </div>
+  <div class="cs-item"><div class="cs-label">Total Collected</div><div class="cs-val acc">${fmt(k.grandTotal)}</div></div>
+  <div class="cs-item"><div class="cs-label">Fees YTD</div><div class="cs-val ok">${fmt(k.totalFees)}</div></div>
+  <div class="cs-item"><div class="cs-label">Donations</div><div class="cs-val">${fmt(k.totalDonations)}</div></div>
+  <div class="cs-item"><div class="cs-label">Outstanding</div><div class="cs-val danger">${fmt(k.totalPending)}</div></div>
+  <div class="cs-item"><div class="cs-label">Active Members</div><div class="cs-val">${k.activeMembers}</div></div>
 </div>
 
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
@@ -1257,13 +624,11 @@ async function renderHome() {
     <div class="card-title"><span class="card-title-icon">📅</span>${curMonth} — This Month</div>
     <div class="kpi-strip" style="grid-template-columns:1fr 1fr;margin-bottom:0">
       <div class="kpi" style="--kpi-bar:var(--ok);--kpi-color:var(--ok)">
-        <div class="kpi-label">Members Paid</div>
-        <div class="kpi-val">${k.thisMonthPaid}</div>
+        <div class="kpi-label">Members Paid</div><div class="kpi-val">${k.thisMonthPaid}</div>
         <div class="kpi-sub">of ${k.activeMembers} active</div>
       </div>
       <div class="kpi" style="--kpi-bar:var(--danger);--kpi-color:var(--danger)">
-        <div class="kpi-label">Unpaid</div>
-        <div class="kpi-val">${k.thisMonthUnpaid}</div>
+        <div class="kpi-label">Unpaid</div><div class="kpi-val">${k.thisMonthUnpaid}</div>
         <div class="kpi-sub">members</div>
       </div>
       <div class="kpi" style="--kpi-bar:var(--acc);--kpi-color:var(--acc)">
@@ -1272,11 +637,10 @@ async function renderHome() {
       </div>
       <div class="kpi" style="--kpi-bar:var(--pri)">
         <div class="kpi-label">Collection %</div>
-        <div class="kpi-val" style="font-size:20px">${k.activeMembers?Math.round(k.thisMonthPaid/k.activeMembers*100):0}%</div>
+        <div class="kpi-val" style="font-size:20px">${k.activeMembers ? Math.round(k.thisMonthPaid/k.activeMembers*100) : 0}%</div>
       </div>
     </div>
   </div>
-
   <div class="card">
     <div class="card-title"><span class="card-title-icon">📈</span>6-Month Trend</div>
     ${renderBarChart(res.monthlySummary)}
@@ -1295,7 +659,6 @@ async function renderHome() {
       </div>
     </div>`).join("")}
   </div>
-
   <div class="card">
     <div class="card-title"><span class="card-title-icon">🏙️</span>City Breakdown</div>
     <div class="table-wrap">
@@ -1312,7 +675,6 @@ async function renderHome() {
     </div>
   </div>
 </div>`;
-
   setContent(html);
 }
 
@@ -1342,8 +704,6 @@ function renderBarChart(monthly) {
 // ═══════════════════════════════════════════════════════
 async function renderPayment() {
   await loadMembers();
-  const active = S.members.filter(m => m.status === "Active");
-
   const html = `
 <div class="page-hdr">
   <div>
@@ -1356,7 +716,6 @@ async function renderPayment() {
   <div>
     <div class="card">
       <div class="card-title"><span class="card-title-icon">💳</span>New Payment</div>
-
       <div class="form-group mb-12">
         <label>Member <span class="req">*</span></label>
         <div class="live-search-wrap">
@@ -1372,7 +731,6 @@ async function renderPayment() {
           </div>
         </div>
       </div>
-
       <div class="form-grid">
         <div class="form-group">
           <label>Date <span class="req">*</span></label>
@@ -1400,11 +758,8 @@ async function renderPayment() {
           </select>
         </div>
       </div>
-
       <div class="flex gap-8 mt-16 items-center flex-wrap">
-        <button class="btn btn-acc" onclick="savePayment()" id="save-btn">
-          💾 Save Payment
-        </button>
+        <button class="btn btn-acc" onclick="savePayment()" id="save-btn">💾 Save Payment</button>
         <button class="btn btn-ghost" onclick="clearPayForm()">✕ Clear</button>
         <span class="text-xs text-muted" style="margin-left:auto">🛡️ Duplicate check active</span>
       </div>
@@ -1430,7 +785,6 @@ async function renderPayment() {
   loadUnpaidQuick();
 }
 
-// Live search
 let lsMembers = [];
 function lsFilter(val) {
   const dd = document.getElementById("ls-dropdown");
@@ -1438,8 +792,9 @@ function lsFilter(val) {
   lsMembers = S.members.filter(m => m.status === "Active" &&
     (m.name.toLowerCase().includes(val.toLowerCase()) ||
      m.code.toLowerCase().includes(val.toLowerCase())));
-  if (!lsMembers.length) { dd.innerHTML = `<div class="lsd-item text-muted">No members found</div>`; }
-  else {
+  if (!lsMembers.length) {
+    dd.innerHTML = `<div class="lsd-item text-muted">No members found</div>`;
+  } else {
     dd.innerHTML = lsMembers.slice(0,8).map((m,i) =>
       `<div class="lsd-item" onclick="lsSelect('${esc(m.code)}')" data-idx="${i}">
         <span class="lsd-code">${esc(m.code)}</span> — ${esc(m.name)}
@@ -1462,23 +817,17 @@ function lsSelect(code) {
   document.getElementById("sel-name").textContent = m.name;
   document.getElementById("sel-meta").textContent = `${m.city} · Fee: ${fmt(m.fee)}/mo`;
   info.classList.remove("hidden");
-  // Auto-fill amount
   const amtEl = document.getElementById("p-amount");
-  if (!amtEl.value) amtEl.value = m.fee;
+  if (amtEl && !amtEl.value) amtEl.value = m.fee;
 }
 function lsOutsideClick(e) {
   const dd = document.getElementById("ls-dropdown");
-  if (dd && !dd.contains(e.target) && e.target.id !== "ls-input") {
-    dd.classList.add("hidden");
-  }
+  if (dd && !dd.contains(e.target) && e.target.id !== "ls-input") dd.classList.add("hidden");
 }
 function handleTypeChange(type) {
   const remarks = document.getElementById("p-remarks");
-  if (type === "Donation") {
-    remarks.value = "Donation - General";
-  } else {
-    remarks.value = "Monthly Fee";
-  }
+  if (type === "Donation") remarks.value = "Donation - General";
+  else remarks.value = "Monthly Fee";
 }
 
 async function loadUnpaidQuick() {
@@ -1507,8 +856,6 @@ async function loadUnpaidQuick() {
 }
 
 function prefillMember(code) {
-  const m = S.members.find(x => x.code === code);
-  if (!m) return;
   lsSelect(code);
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -1525,7 +872,7 @@ async function loadRecentPayments() {
   }
   const now = Date.now();
   el.innerHTML = recent.map(p => {
-    const isFee = p.type === "Membership Fee";
+    const isFee    = p.type === "Membership Fee";
     const editable = S.user.role === "admin" ||
       (["admin","pe"].includes(S.user.role) && (now - p.savedAt) < EDIT_WIN_MS);
     const tLeft = Math.max(0, Math.round((EDIT_WIN_MS - (now - p.savedAt)) / 60000));
@@ -1639,9 +986,9 @@ function printReceipt(rNo, enc) {
   w.document.write(`<!DOCTYPE html><html><head><title>Receipt ${rNo}</title>
   <style>body{font-family:'Courier New',monospace;padding:36px;max-width:380px;margin:0 auto;font-size:13px;line-height:1.9}
   h2{font-family:Arial;font-size:16px;text-align:center;color:#1B3C53;margin-bottom:16px}
-  pre{white-space:pre-wrap}@media print{body{padding:16px}}</style></head>
-  <body><h2>Udyawar Dammam Committee</h2><pre>${txt.replace(/</g,"&lt;")}</pre>
-  <script>window.onload=()=>window.print()<\/script></body></html>`);
+  pre{white-space:pre-wrap}@media print{body{padding:16px}}<\/style><\/head>
+  <body><h2>Udyawar Dammam Committee<\/h2><pre>${txt.replace(/</g,"&lt;")}<\/pre>
+  <script>window.onload=()=>window.print()<\/script><\/body><\/html>`);
   w.document.close();
 }
 
@@ -1668,9 +1015,9 @@ async function openEditPayment(receiptNo) {
 
 async function submitEdit(receiptNo, orig) {
   const code = document.getElementById("ep-mem").value;
-  const mm = S.members.find(x=>x.code===code);
-  const res = await api("editPayment",{payment:{
-    receiptNo,memberCode:code,memberName:mm?mm.name:orig.memberName,
+  const mm   = S.members.find(x=>x.code===code);
+  const res  = await api("editPayment",{payment:{
+    receiptNo, memberCode:code, memberName:mm?mm.name:orig.memberName,
     date:document.getElementById("ep-date").value,
     type:document.getElementById("ep-type").value,
     amount:Number(document.getElementById("ep-amt").value),
@@ -1695,7 +1042,6 @@ let activeCity = "All";
 async function renderMembers() {
   await loadMembers(true);
   const canEdit = ["admin","pe"].includes(S.user.role);
-
   const html = `
 <div class="page-hdr">
   <div>
@@ -1704,16 +1050,13 @@ async function renderMembers() {
   </div>
   ${canEdit?`<button class="btn btn-primary" onclick="openAddMember()">+ Add Member</button>`:""}
 </div>
-
 <div class="search-bar">
   <span class="search-icon">🔍</span>
   <input id="mem-search" placeholder="Search by name or code…" oninput="filterMems(this.value)">
 </div>
-
 <div class="chip-row" id="city-chips">
   ${CITIES.map(c=>`<div class="chip ${c===activeCity?"active":""}" onclick="filterCity('${c}')">${c}</div>`).join("")}
 </div>
-
 <div id="mem-grid">${renderMemberCards(S.members)}</div>`;
   setContent(html);
 }
@@ -1722,11 +1065,11 @@ function renderMemberCards(members) {
   const filtered = activeCity === "All" ? members : members.filter(m=>m.city===activeCity);
   if (!filtered.length) return `<div class="empty-state"><div class="empty-icon">👥</div><div class="empty-text">No members found</div></div>`;
   return `<div class="member-grid">${filtered.map(m=>{
-    const pending  = calcPending(m);
-    const overdue  = getOverdueMonths(m);
-    const ji       = MONTHS.indexOf(m.joinMonth);
-    const mo       = ji >= 0 ? 12 - ji : 12;
-   const annualDue = (m.annualDue !== undefined) ? m.annualDue : (Number(m.fee) * mo + Number(m.openingBal || 0));
+    const pending   = calcPending(m);
+    const overdue   = getOverdueMonths(m);
+    const ji        = MONTHS.indexOf(m.joinMonth);
+    const mo        = ji >= 0 ? 12 - ji : 12;
+    const annualDue = (m.annualDue !== undefined) ? m.annualDue : (Number(m.fee) * mo + Number(m.openingBal || 0));
     const pct = annualDue > 0
       ? Math.min(100, Math.max(0, Math.round((1 - pending / annualDue) * 100)))
       : 100;
@@ -1760,14 +1103,13 @@ function renderMemberCards(members) {
 }
 
 function renderRing(pct) {
-  const r=18,c=2*Math.PI*r,dash=Math.round(pct/100*c);
+  const r=18, c=2*Math.PI*r, dash=Math.round(pct/100*c);
   const color = pct>=100?"#5D866C":pct>=50?"#E9762B":"#A03A13";
   return `<div class="ring-wrap">
     <svg width="44" height="44" viewBox="0 0 44 44">
       <circle cx="22" cy="22" r="${r}" fill="none" stroke="#E6D8C3" stroke-width="4"/>
       <circle cx="22" cy="22" r="${r}" fill="none" stroke="${color}" stroke-width="4"
-        stroke-dasharray="${dash} ${c}" stroke-linecap="round"
-        transform="rotate(-90 22 22)"/>
+        stroke-dasharray="${dash} ${c}" stroke-linecap="round" transform="rotate(-90 22 22)"/>
     </svg>
     <div class="ring-text">${pct}%</div>
   </div>`;
@@ -1782,17 +1124,17 @@ function filterMems(q) {
 
 function filterCity(city) {
   activeCity = city;
-  document.querySelectorAll(".chip").forEach(el=>
-    el.classList.toggle("active", el.textContent===city));
+  document.querySelectorAll(".chip").forEach(el=>el.classList.toggle("active", el.textContent===city));
   const q = document.getElementById("mem-search")?.value||"";
   filterMems(q);
 }
-function quickPay(code) 
+
+// ✅ FIX: quickPay — removed invalid .then?.():null syntax and duplicate navigate calls
+function quickPay(code) {
   navigate("payment");
   setTimeout(() => { lsSelect(code); }, 700);
 }
 
-// ── Add / Edit member modals ──
 function openAddMember() {
   memberModal("Add Member",{code:"",name:"",city:"Dammam",contact:"",fee:10,openingBal:0,status:"Active",joinMonth:"January"},false);
 }
@@ -1802,60 +1144,41 @@ function openEditMember(code) {
 }
 
 function memberModal(title,m,isEdit) {
-  const cityOpts = ["Dammam","Jubail","Khobar","Sarrar","Riyadh"]
-    .map(c=>`<option ${m.city===c?"selected":""}>${c}</option>`).join("");
-  const statusOpts = ["Active","Inactive"]
-    .map(s=>`<option ${m.status===s?"selected":""}>${s}</option>`).join("");
-  const monthOpts = MONTHS.map(mo=>`<option ${m.joinMonth===mo?"selected":""}>${mo}</option>`).join("");
-
+  const cityOpts   = ["Dammam","Jubail","Khobar","Sarrar","Riyadh"].map(c=>`<option ${m.city===c?"selected":""}>${c}</option>`).join("");
+  const statusOpts = ["Active","Inactive"].map(s=>`<option ${m.status===s?"selected":""}>${s}</option>`).join("");
+  const monthOpts  = MONTHS.map(mo=>`<option ${m.joinMonth===mo?"selected":""}>${mo}</option>`).join("");
   showModal(title,`
   <div class="form-grid">
-    <div class="form-group">
-      <label>Code <span class="req">*</span></label>
-      <input id="m-code" class="hi" value="${esc(m.code)}" placeholder="M001" ${isEdit?"readonly":""}>
-    </div>
-    <div class="form-group">
-      <label>Full Name <span class="req">*</span></label>
-      <input id="m-name" class="hi" value="${esc(m.name)}" placeholder="Full name">
-    </div>
-    <div class="form-group">
-      <label>City <span class="req">*</span></label>
-      <select id="m-city">${cityOpts}</select>
-    </div>
-    <div class="form-group">
-      <label>WhatsApp Number</label>
-      <input id="m-contact" value="${esc(m.contact)}" placeholder="966501234567">
-    </div>
-    <div class="form-group">
-      <label>Monthly Fee <span class="req">*</span></label>
-      <input id="m-fee" type="number" class="hi" value="${m.fee}" min="0">
-    </div>
-    <div class="form-group">
-      <label>Opening Balance</label>
-      <input id="m-openingbal" type="number" value="${m.openingBal||0}" min="0">
-    </div>
-    <div class="form-group">
-      <label>Status</label>
-      <select id="m-status">${statusOpts}</select>
-    </div>
-    <div class="form-group">
-      <label>Join Month <span class="req">*</span></label>
-      <select id="m-joinmonth">${monthOpts}</select>
-    </div>
+    <div class="form-group"><label>Code <span class="req">*</span></label>
+      <input id="m-code" class="hi" value="${esc(m.code)}" placeholder="M001" ${isEdit?"readonly":""}></div>
+    <div class="form-group"><label>Full Name <span class="req">*</span></label>
+      <input id="m-name" class="hi" value="${esc(m.name)}" placeholder="Full name"></div>
+    <div class="form-group"><label>City <span class="req">*</span></label>
+      <select id="m-city">${cityOpts}</select></div>
+    <div class="form-group"><label>WhatsApp Number</label>
+      <input id="m-contact" value="${esc(m.contact)}" placeholder="966501234567"></div>
+    <div class="form-group"><label>Monthly Fee <span class="req">*</span></label>
+      <input id="m-fee" type="number" class="hi" value="${m.fee}" min="0"></div>
+    <div class="form-group"><label>Opening Balance</label>
+      <input id="m-openingbal" type="number" value="${m.openingBal||0}" min="0"></div>
+    <div class="form-group"><label>Status</label>
+      <select id="m-status">${statusOpts}</select></div>
+    <div class="form-group"><label>Join Month <span class="req">*</span></label>
+      <select id="m-joinmonth">${monthOpts}</select></div>
   </div>`,
   [{label:isEdit?"Save Changes":"Add Member",cls:"btn-primary",action:()=>saveMember(isEdit)}]);
 }
 
 async function saveMember(isEdit) {
   const m = {
-    code:      document.getElementById("m-code").value.trim().toUpperCase(),
-    name:      document.getElementById("m-name").value.trim(),
-    city:      document.getElementById("m-city").value,
-    contact:   document.getElementById("m-contact").value.trim(),
-    fee:       Number(document.getElementById("m-fee").value),
-    openingBal:Number(document.getElementById("m-openingbal").value),
-    status:    document.getElementById("m-status").value,
-    joinMonth: document.getElementById("m-joinmonth").value,
+    code:       document.getElementById("m-code").value.trim().toUpperCase(),
+    name:       document.getElementById("m-name").value.trim(),
+    city:       document.getElementById("m-city").value,
+    contact:    document.getElementById("m-contact").value.trim(),
+    fee:        Number(document.getElementById("m-fee").value),
+    openingBal: Number(document.getElementById("m-openingbal").value),
+    status:     document.getElementById("m-status").value,
+    joinMonth:  document.getElementById("m-joinmonth").value,
   };
   if (!m.code||!m.name||!m.fee){toast("Fill all required fields.","err");return;}
   const res = await api(isEdit?"editMember":"addMember",{member:m});
@@ -1866,17 +1189,15 @@ async function saveMember(isEdit) {
 // ── Profile view ──
 async function viewMemberProfile(code) {
   setContent('<div class="page-loader"><div class="spinner spinner-dark"></div>Loading profile…</div>');
-  // Update nav to "search" visual state
   document.querySelectorAll(".tab-item,.bnav-item").forEach(el=>el.classList.remove("active"));
-
   const res = await api("getMemberSummary",{memberCode:code});
   if (!res.ok){setContent(`<p class="text-danger">${esc(res.error)}</p>`);return;}
   const m=res.member, s=res.summary;
-  const contact=m.contact||"";
-  const waMsg = buildWAMsg(m,s);
-  const waLink = contact?`https://web.whatsapp.com/send?phone=${contact}&text=${encodeURIComponent(waMsg)}`:"";
-  const canPay = ["admin","pe"].includes(S.user.role);
-  const pending_s = s.pendingBal>0?"danger":s.pendingBal<0?"pri":"ok";
+  const contact  = m.contact||"";
+  const waMsg    = buildWAMsg(m,s);
+  const waLink   = contact?`https://web.whatsapp.com/send?phone=${contact}&text=${encodeURIComponent(waMsg)}`:"";
+  const canPay   = ["admin","pe"].includes(S.user.role);
+  const pending_s= s.pendingBal>0?"danger":s.pendingBal<0?"pri":"ok";
 
   const html = `
 <div class="flex gap-8 mb-12 items-center">
@@ -1902,30 +1223,12 @@ async function viewMemberProfile(code) {
     </div>
   </div>
   <div class="ph-strip">
-    <div class="ph-stat">
-      <div class="ph-stat-label">Fees Paid</div>
-      <div class="ph-stat-val ok">${fmt(s.totalFees)}</div>
-    </div>
-    <div class="ph-stat">
-      <div class="ph-stat-label">Donations</div>
-      <div class="ph-stat-val acc">${fmt(s.totalDonations)}</div>
-    </div>
-    <div class="ph-stat">
-      <div class="ph-stat-label">Annual Due</div>
-      <div class="ph-stat-val">${fmt(s.annualDue)}</div>
-    </div>
-    <div class="ph-stat">
-      <div class="ph-stat-label">Pending Balance</div>
-      <div class="ph-stat-val ${pending_s}">${fmt(s.pendingBal)}</div>
-    </div>
-    <div class="ph-stat">
-      <div class="ph-stat-label">Paid Up To</div>
-      <div class="ph-stat-val" style="font-size:14px;color:#fff">${esc(s.paidUpTo)}</div>
-    </div>
-    <div class="ph-stat">
-      <div class="ph-stat-label">Last Payment</div>
-      <div class="ph-stat-val" style="font-size:14px;color:rgba(255,255,255,.8)">${esc(s.lastPayment)}</div>
-    </div>
+    <div class="ph-stat"><div class="ph-stat-label">Fees Paid</div><div class="ph-stat-val ok">${fmt(s.totalFees)}</div></div>
+    <div class="ph-stat"><div class="ph-stat-label">Donations</div><div class="ph-stat-val acc">${fmt(s.totalDonations)}</div></div>
+    <div class="ph-stat"><div class="ph-stat-label">Annual Due</div><div class="ph-stat-val">${fmt(s.annualDue)}</div></div>
+    <div class="ph-stat"><div class="ph-stat-label">Pending Balance</div><div class="ph-stat-val ${pending_s}">${fmt(s.pendingBal)}</div></div>
+    <div class="ph-stat"><div class="ph-stat-label">Paid Up To</div><div class="ph-stat-val" style="font-size:14px;color:#fff">${esc(s.paidUpTo)}</div></div>
+    <div class="ph-stat"><div class="ph-stat-label">Last Payment</div><div class="ph-stat-val" style="font-size:14px;color:rgba(255,255,255,.8)">${esc(s.lastPayment)}</div></div>
   </div>
 </div>
 
@@ -1936,12 +1239,12 @@ async function viewMemberProfile(code) {
   </div>
   <div>
     <div class="card">
-      <div class="card-title"><span class="card-title-icon">📊</span>Monthly Status — 2026</div>
+      <div class="card-title"><span class="card-title-icon">📊</span>Monthly Status — ${ACTIVE_YEAR}</div>
       <div class="month-grid">
         ${MONTHS.map(mo=>{
-          const st=res.monthStatus[mo]||"na";
-          const cls=st==="paid"?"mc-paid":st==="unpaid"?"mc-unpaid":"mc-na";
-          const icon=st==="paid"?"✅":st==="unpaid"?"❌":"—";
+          const st  = res.monthStatus[mo]||"na";
+          const cls = st==="paid"?"mc-paid":st==="unpaid"?"mc-unpaid":"mc-na";
+          const icon= st==="paid"?"✅":st==="unpaid"?"❌":"—";
           return `<div>
             <div class="month-cell ${cls}">${mo.substring(0,3)}</div>
             <div class="month-cell-lbl">${icon}</div>
@@ -1949,7 +1252,6 @@ async function viewMemberProfile(code) {
         }).join("")}
       </div>
     </div>
-
     <div class="card">
       <div class="card-title"><span class="card-title-icon">💬</span>WhatsApp Message</div>
       <div class="receipt-box" id="wa-box" style="max-height:180px">${esc(waMsg)}</div>
@@ -1963,29 +1265,25 @@ async function viewMemberProfile(code) {
 </div>`;
 
   setContent(html);
-  // Open current year by default
   const curYearToggle = document.querySelector(".year-toggle");
   if (curYearToggle) toggleYear(curYearToggle);
 }
 
 function buildYearAccordion(payments, m) {
-  // Group payments by year
   const byYear = {};
   payments.forEach(p => {
-    const yr = p.date ? new Date(p.date.split("-").reverse().join("-")).getFullYear() : 2026;
+    const yr = p.date ? new Date(p.date.split("-").reverse().join("-")).getFullYear() : ACTIVE_YEAR;
     if (!byYear[yr]) byYear[yr] = [];
     byYear[yr].push(p);
   });
-  // Ensure current year exists
-  const curYear = new Date().getFullYear();
-  if (!byYear[curYear]) byYear[curYear] = [];
+  if (!byYear[ACTIVE_YEAR]) byYear[ACTIVE_YEAR] = [];
   const years = Object.keys(byYear).sort((a,b)=>b-a);
 
   return years.map(yr => {
     const yPays = byYear[yr];
     const yFees = yPays.filter(p=>p.type==="Membership Fee").reduce((s,p)=>s+Number(p.amount),0);
     const yDon  = yPays.filter(p=>p.type==="Donation").reduce((s,p)=>s+Number(p.amount),0);
-    const rows = yPays.length ? yPays.map(p=>`
+    const rows  = yPays.length ? yPays.map(p=>`
       <div class="pay-item">
         <div class="pay-icon ${p.type==="Membership Fee"?"pi-fee":"pi-don"}" style="width:28px;height:28px;font-size:12px">
           ${p.type==="Membership Fee"?"💳":"🤲"}
@@ -1997,13 +1295,12 @@ function buildYearAccordion(payments, m) {
         <div class="pay-amount ${p.type==="Membership Fee"?"text-pri":"text-acc"}" style="font-size:13px">${fmt(p.amount)}</div>
       </div>`).join("")
       : `<div class="empty-state" style="padding:16px 0"><div class="empty-sub">No payments in ${yr}</div></div>`;
+
     return `
     <div class="year-section">
       <div class="year-toggle" onclick="toggleYear(this)">
         <div class="year-toggle-title">${yr}
-          <span class="text-muted text-xs" style="margin-left:8px">
-            Fees: ${fmt(yFees)} · Donations: ${fmt(yDon)}
-          </span>
+          <span class="text-muted text-xs" style="margin-left:8px">Fees: ${fmt(yFees)} · Donations: ${fmt(yDon)}</span>
         </div>
         <span class="year-toggle-arrow">▼</span>
       </div>
@@ -2014,13 +1311,12 @@ function buildYearAccordion(payments, m) {
 
 function toggleYear(el) {
   el.classList.toggle("open");
-  const body = el.nextElementSibling;
-  body.classList.toggle("open");
+  el.nextElementSibling.classList.toggle("open");
 }
 
 function profilePay(code) {
   navigate("payment");
-  setTimeout(()=>lsSelect(code),500);
+  setTimeout(()=>lsSelect(code), 500);
 }
 
 function copyWA() {
@@ -2050,12 +1346,12 @@ function memberStatement(code) {
   if (!m) return;
   api("getMemberSummary",{memberCode:code}).then(res=>{
     if (!res.ok) return;
-    const s=res.summary;
-    const rows=res.payments.map(p=>
+    const s    = res.summary;
+    const rows = res.payments.map(p=>
       `<tr><td>${p.receiptNo}</td><td>${p.date}</td><td>${p.type}</td><td>${fmt(p.amount)}</td><td>${p.remarks||"—"}</td><td>${p.month}</td></tr>`
     ).join("");
-    const w=window.open("","_blank");
-    w.document.write(`<!DOCTYPE html><html><head><title>Statement — ${m.code}</title>
+    const w = window.open("","_blank");
+    w.document.write(`<!DOCTYPE html><html><head><title>Statement — ${m.code}<\/title>
     <style>body{font-family:Arial,sans-serif;padding:28px;max-width:700px;margin:0 auto;font-size:13px;color:#452829}
     h1{font-size:18px;color:#1B3C53;margin-bottom:4px}h2{font-size:13px;color:#9A8678;font-weight:normal;margin-bottom:20px}
     .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
@@ -2066,19 +1362,19 @@ function memberStatement(code) {
     th{background:#1B3C53;color:#fff;padding:8px 10px;text-align:left;font-size:11px;text-transform:uppercase}
     td{padding:8px 10px;border-bottom:1px solid #E6D8C3;font-size:12px}
     .footer{margin-top:20px;font-size:10px;color:#9A8678}
-    @media print{body{padding:16px}}</style></head>
+    @media print{body{padding:16px}}<\/style><\/head>
     <body>
-    <h1>${m.name}</h1>
-    <h2>${m.code} · ${m.city} · ${m.status} · Fee: ${fmt(m.fee)}/month · Joined: ${m.joinMonth}</h2>
+    <h1>${m.name}<\/h1>
+    <h2>${m.code} · ${m.city} · ${m.status} · Fee: ${fmt(m.fee)}/month · Joined: ${m.joinMonth}<\/h2>
     <div class="stats">
-      <div class="stat"><div class="stat-l">Fees Paid</div><div class="stat-v">${fmt(s.totalFees)}</div></div>
-      <div class="stat"><div class="stat-l">Pending</div><div class="stat-v" style="color:#A03A13">${fmt(s.pendingBal)}</div></div>
-      <div class="stat"><div class="stat-l">Paid Up To</div><div class="stat-v" style="font-size:13px">${s.paidUpTo}</div></div>
-    </div>
-    <table><tr><th>Receipt</th><th>Date</th><th>Type</th><th>Amount</th><th>Remarks</th><th>Month</th></tr>${rows}</table>
-    <div class="footer">Generated by UDC Membership System · Udyawar Dammam Committee · ${new Date().toLocaleDateString()}</div>
+      <div class="stat"><div class="stat-l">Fees Paid<\/div><div class="stat-v">${fmt(s.totalFees)}<\/div><\/div>
+      <div class="stat"><div class="stat-l">Pending<\/div><div class="stat-v" style="color:#A03A13">${fmt(s.pendingBal)}<\/div><\/div>
+      <div class="stat"><div class="stat-l">Paid Up To<\/div><div class="stat-v" style="font-size:13px">${s.paidUpTo}<\/div><\/div>
+    <\/div>
+    <table><tr><th>Receipt<\/th><th>Date<\/th><th>Type<\/th><th>Amount<\/th><th>Remarks<\/th><th>Month<\/th><\/tr>${rows}<\/table>
+    <div class="footer">Generated by UDC Membership System · Udyawar Dammam Committee · ${new Date().toLocaleDateString()}<\/div>
     <script>window.onload=()=>window.print()<\/script>
-    </body></html>`);
+    <\/body><\/html>`);
     w.document.close();
   });
 }
@@ -2091,7 +1387,7 @@ function renderSearch() {
 <div class="page-hdr">
   <div>
     <div class="page-hdr-title">Member Search</div>
-    <div class="page-hdr-sub">Complete history from Jan 2026 · Unaffected by report filters</div>
+    <div class="page-hdr-sub">Complete history · Unaffected by report filters</div>
   </div>
 </div>
 <div class="card">
@@ -2135,15 +1431,14 @@ async function gsSubmit() {
 async function gsLoad(code) {
   const el = document.getElementById("gs-result");
   el.innerHTML = '<div class="page-loader"><div class="spinner spinner-dark"></div>Loading…</div>';
-  // Reuse profile view logic but render inside gs-result
   const res = await api("getMemberSummary",{memberCode:code});
   if (!res.ok){el.innerHTML=`<p class="text-danger">${esc(res.error)}</p>`;return;}
-  const m=res.member,s=res.summary;
+  const m=res.member, s=res.summary;
   const contact=m.contact||"";
-  const waMsg=buildWAMsg(m,s);
-  const waLink=contact?`https://web.whatsapp.com/send?phone=${contact}&text=${encodeURIComponent(waMsg)}`:"";
-  const canPay=["admin","pe"].includes(S.user.role);
-  const ps=s.pendingBal>0?"danger":s.pendingBal<0?"pri":"ok";
+  const waMsg  =buildWAMsg(m,s);
+  const waLink =contact?`https://web.whatsapp.com/send?phone=${contact}&text=${encodeURIComponent(waMsg)}`:"";
+  const canPay =["admin","pe"].includes(S.user.role);
+  const ps     =s.pendingBal>0?"danger":s.pendingBal<0?"pri":"ok";
 
   el.innerHTML=`
 <div class="profile-header">
@@ -2176,11 +1471,11 @@ async function gsLoad(code) {
   </div>
   <div>
     <div class="card">
-      <div class="card-title"><span class="card-title-icon">📊</span>Monthly Status 2026</div>
+      <div class="card-title"><span class="card-title-icon">📊</span>Monthly Status ${ACTIVE_YEAR}</div>
       <div class="month-grid">
         ${MONTHS.map(mo=>{
-          const st=res.monthStatus[mo]||"na";
-          const cls=st==="paid"?"mc-paid":st==="unpaid"?"mc-unpaid":"mc-na";
+          const st  = res.monthStatus[mo]||"na";
+          const cls = st==="paid"?"mc-paid":st==="unpaid"?"mc-unpaid":"mc-na";
           return `<div><div class="month-cell ${cls}">${mo.substring(0,3)}</div>
             <div class="month-cell-lbl">${st==="paid"?"✅":st==="unpaid"?"❌":"—"}</div></div>`;
         }).join("")}
@@ -2198,7 +1493,6 @@ async function gsLoad(code) {
   </div>
 </div>`;
 
-  // Open first year
   const first = document.querySelector("#gs-result .year-toggle");
   if (first) toggleYear(first);
 }
@@ -2209,7 +1503,6 @@ async function gsLoad(code) {
 async function renderMonthly(month) {
   const curMonth = month || MONTHS[new Date().getMonth()];
   const monthOpts = MONTHS.map(m=>`<option ${m===curMonth?"selected":""}>${m}</option>`).join("");
-
   const res = await api("getMonthlyReport",{month:curMonth});
   if (!res.ok){setContent(`<p class="text-danger">${esc(res.error)}</p>`);return;}
   const k=res.kpis;
@@ -2227,21 +1520,17 @@ async function renderMonthly(month) {
 
 <div class="kpi-strip">
   <div class="kpi" style="--kpi-bar:var(--pri)">
-    <div class="kpi-label">Active Members</div>
-    <div class="kpi-val">${k.activeMembers}</div>
+    <div class="kpi-label">Active Members</div><div class="kpi-val">${k.activeMembers}</div>
   </div>
   <div class="kpi" style="--kpi-bar:var(--acc);--kpi-color:var(--acc)">
-    <div class="kpi-label">Fees — ${curMonth}</div>
-    <div class="kpi-val">${fmt(k.feesThisMonth)}</div>
+    <div class="kpi-label">Fees — ${curMonth}</div><div class="kpi-val">${fmt(k.feesThisMonth)}</div>
   </div>
   <div class="kpi" style="--kpi-bar:var(--ok);--kpi-color:var(--ok)">
-    <div class="kpi-label">Paid</div>
-    <div class="kpi-val">${k.membersPaid}</div>
+    <div class="kpi-label">Paid</div><div class="kpi-val">${k.membersPaid}</div>
     <div class="kpi-sub">members</div>
   </div>
   <div class="kpi" style="--kpi-bar:var(--danger);--kpi-color:var(--danger)">
-    <div class="kpi-label">Unpaid</div>
-    <div class="kpi-val">${k.unpaidCount}</div>
+    <div class="kpi-label">Unpaid</div><div class="kpi-val">${k.unpaidCount}</div>
     <div class="kpi-sub">members</div>
   </div>
 </div>
@@ -2253,8 +1542,7 @@ async function renderMonthly(month) {
     </div>
     ${res.paid.length===0
       ? `<div class="empty-state"><div class="empty-text">No payments recorded for ${curMonth}</div></div>`
-      : `<div class="table-wrap" style="border:none;border-radius:0">
-        <table>
+      : `<div class="table-wrap" style="border:none;border-radius:0"><table>
           <tr><th>Code</th><th>Name</th><th>City</th><th>Amount</th><th>Receipt</th></tr>
           ${res.paid.map(p=>`<tr>
             <td><strong>${esc(p.code)}</strong></td>
@@ -2263,8 +1551,7 @@ async function renderMonthly(month) {
             <td><span class="pill pill-ok">${fmt(p.amount)}</span></td>
             <td class="text-muted text-xs">${esc(p.receiptNo)}</td>
           </tr>`).join("")}
-        </table>
-      </div>`}
+        </table></div>`}
   </div>
   <div class="card" style="padding:0;overflow:hidden">
     <div style="padding:14px 16px;background:var(--danger-lt);font-size:13px;font-weight:700;color:var(--danger)">
@@ -2272,8 +1559,7 @@ async function renderMonthly(month) {
     </div>
     ${res.unpaid.length===0
       ? `<div class="empty-state" style="padding:24px"><div class="empty-icon">🎉</div><div class="empty-text">All members paid for ${curMonth}!</div></div>`
-      : `<div class="table-wrap" style="border:none;border-radius:0">
-        <table>
+      : `<div class="table-wrap" style="border:none;border-radius:0"><table>
           <tr><th>Code</th><th>Name</th><th>City</th><th>Fee</th><th>Pending</th></tr>
           ${res.unpaid.map(p=>`<tr>
             <td><strong>${esc(p.code)}</strong></td>
@@ -2282,8 +1568,7 @@ async function renderMonthly(month) {
             <td>${fmt(p.fee)}</td>
             <td><span class="pill pill-danger">${fmt(p.pending)}</span></td>
           </tr>`).join("")}
-        </table>
-      </div>`}
+        </table></div>`}
   </div>
 </div>`;
   setContent(html);
@@ -2304,18 +1589,14 @@ async function renderAudit() {
 <div class="card">
   <p class="text-muted" style="font-size:13px;line-height:1.7">
     The audit log is recorded in real time in your Google Sheet.
-    Click the button below to open the Audit Log tab directly.
+    Click below to open the Audit Log tab directly.
   </p>
   <div class="mt-16">
     <a href="https://docs.google.com/spreadsheets/d/1yl-weNggjW3awS1aYKno2wCC2Q2hQC-pdDZ2n_OSB9Y/edit#gid=2"
-      target="_blank" class="btn btn-primary">
-      📊 Open Audit Log in Google Sheet
-    </a>
+      target="_blank" class="btn btn-primary">📊 Open Audit Log in Google Sheet</a>
   </div>
   <div class="divider"></div>
-  <p class="text-xs text-muted">
-    You can add a <code>getAuditLog()</code> function to Code.gs to load the log directly here in a future update.
-  </p>
+  <p class="text-xs text-muted">A <code>getAuditLog()</code> function can be added to Code.gs in a future update to render this inline.</p>
 </div>`);
 }
 
@@ -2340,48 +1621,29 @@ async function renderSettings() {
   <div class="card">
     <div class="card-title">🏢 Organisation</div>
     <div class="form-grid">
-      <div class="form-group form-full">
-        <label>Organisation Name</label>
-        <input id="s-orgname" value="${esc(cfg.orgName)}">
-      </div>
-      <div class="form-group">
-        <label>Short Name</label>
-        <input id="s-orgshort" value="${esc(cfg.orgShort)}">
-      </div>
-      <div class="form-group">
-        <label>Default Monthly Fee</label>
-        <input id="s-fee" type="number" value="${cfg.defaultFee}" min="0">
-      </div>
-      <div class="form-group">
-        <label>Active Year</label>
-        <input id="s-year" type="number" value="${cfg.currentYear||new Date().getFullYear()}" min="2020">
-      </div>
+      <div class="form-group form-full"><label>Organisation Name</label>
+        <input id="s-orgname" value="${esc(cfg.orgName)}"></div>
+      <div class="form-group"><label>Short Name</label>
+        <input id="s-orgshort" value="${esc(cfg.orgShort)}"></div>
+      <div class="form-group"><label>Default Monthly Fee</label>
+        <input id="s-fee" type="number" value="${cfg.defaultFee}" min="0"></div>
+      <div class="form-group"><label>Active Year</label>
+        <input id="s-year" type="number" value="${cfg.currentYear||new Date().getFullYear()}" min="2020"></div>
     </div>
   </div>
-
   <div class="card">
     <div class="card-title">🔐 Access PINs</div>
     <div class="form-grid">
-      <div class="form-group">
-        <label>Admin PIN</label>
-        <input id="s-adminpin" type="password" value="${esc(cfg.pins.adminPin)}" maxlength="6" placeholder="••••">
-      </div>
-      <div class="form-group">
-        <label>Payment Entry 1</label>
-        <input id="s-pe1pin" type="password" value="${esc(cfg.pins.pe1Pin)}" maxlength="6" placeholder="••••">
-      </div>
-      <div class="form-group">
-        <label>Payment Entry 2</label>
-        <input id="s-pe2pin" type="password" value="${esc(cfg.pins.pe2Pin)}" maxlength="6" placeholder="••••">
-      </div>
-      <div class="form-group">
-        <label>Search Only 1</label>
-        <input id="s-s1pin" type="password" value="${esc(cfg.pins.search1Pin)}" maxlength="6" placeholder="••••">
-      </div>
-      <div class="form-group form-full">
-        <label>Search Only 2</label>
-        <input id="s-s2pin" type="password" value="${esc(cfg.pins.search2Pin)}" maxlength="6" placeholder="••••">
-      </div>
+      <div class="form-group"><label>Admin PIN</label>
+        <input id="s-adminpin" type="password" value="${esc(cfg.pins.adminPin)}" maxlength="6" placeholder="••••"></div>
+      <div class="form-group"><label>Payment Entry 1</label>
+        <input id="s-pe1pin" type="password" value="${esc(cfg.pins.pe1Pin)}" maxlength="6" placeholder="••••"></div>
+      <div class="form-group"><label>Payment Entry 2</label>
+        <input id="s-pe2pin" type="password" value="${esc(cfg.pins.pe2Pin)}" maxlength="6" placeholder="••••"></div>
+      <div class="form-group"><label>Search Only 1</label>
+        <input id="s-s1pin" type="password" value="${esc(cfg.pins.search1Pin)}" maxlength="6" placeholder="••••"></div>
+      <div class="form-group form-full"><label>Search Only 2</label>
+        <input id="s-s2pin" type="password" value="${esc(cfg.pins.search2Pin)}" maxlength="6" placeholder="••••"></div>
     </div>
   </div>
 </div>
@@ -2438,13 +1700,13 @@ function showModal(title, body, buttons=[]) {
   });
 }
 
-function closeModal(){document.getElementById("modal-container").innerHTML="";}
+function closeModal(){ document.getElementById("modal-container").innerHTML=""; }
 
 // ═══════════════════════════════════════════════════════
 // OFFLINE
 // ═══════════════════════════════════════════════════════
-window.addEventListener("online",  ()=>{document.getElementById("offline-bar").style.display="none";});
-window.addEventListener("offline", ()=>{document.getElementById("offline-bar").style.display="block";});
+window.addEventListener("online",  ()=>{ document.getElementById("offline-bar").style.display="none"; });
+window.addEventListener("offline", ()=>{ document.getElementById("offline-bar").style.display="block"; });
 
 // ═══════════════════════════════════════════════════════
 // INIT
