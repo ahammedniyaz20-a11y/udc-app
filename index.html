@@ -1787,13 +1787,9 @@ function filterCity(city) {
   const q = document.getElementById("mem-search")?.value||"";
   filterMems(q);
 }
-
-function quickPay(code) {
-  navigate("payment").then?.(()=>{}):null;
-  setTimeout(()=>{ lsSelect(code); },600);
+function quickPay(code) 
   navigate("payment");
-  setTimeout(()=>{ const el=document.getElementById("ls-input"); if(el){el.value=code;lsFilter(code);} },400);
-  setTimeout(()=>lsSelect(code),600);
+  setTimeout(() => { lsSelect(code); }, 700);
 }
 
 // ── Add / Edit member modals ──
