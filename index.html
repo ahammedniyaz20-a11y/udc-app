@@ -351,6 +351,7 @@ tbody tr:hover td{background:rgba(161,194,189,.08)}
       <button class="tab-item" data-page="members" id="tnav-members" onclick="navigate('members')"><span class="tab-icon">👥</span> Members</button>
       <button class="tab-item" data-page="search" onclick="navigate('search')"><span class="tab-icon">🔍</span> Member Search</button>
       <button class="tab-item" data-page="monthly" onclick="navigate('monthly')"><span class="tab-icon">📅</span> Monthly Report</button>
+      <button class="tab-item" data-page="yeartracker" onclick="navigate('yeartracker')"><span class="tab-icon">🗓️</span> Year Tracker</button>
       <button class="tab-item hidden" data-page="audit" id="tnav-audit" onclick="navigate('audit')"><span class="tab-icon">📋</span> Audit Log</button>
       <button class="tab-item hidden" data-page="settings" id="tnav-settings" onclick="navigate('settings')"><span class="tab-icon">⚙️</span> Settings</button>
     </nav>
@@ -529,6 +530,7 @@ async function navigate(page) {
     case "members":  await renderMembers();  break;
     case "search":         renderSearch();   break;
     case "monthly":  await renderMonthly();  break;
+    case "yeartracker": await renderYearTracker(); break;
     case "audit":    await renderAudit();    break;
     case "settings": await renderSettings(); break;
   }
@@ -678,6 +680,106 @@ async function renderHome() {
   setContent(html);
 }
 
+// ═══════════════════════════════════════════════════════
+// YEAR TRACKER
+// ═══════════════════════════════════════════════════════
+async function renderYearTracker() {
+  await loadMembers();
+  const res = await api("getPayments", {});
+  if (!res.ok) { setContent(`<p class="text-danger">${esc(res.error)}</p>`); return; }
+  const payments = res.payments || [];
+  const activeMembers = S.members.filter(m => m.status === "Active");
+
+  // Build payment lookup: code -> month -> total fee paid
+  const payMap = {};
+  payments.forEach(p => {
+    if (p.type !== "Membership Fee") return;
+    if (!payMap[p.memberCode]) payMap[p.memberCode] = {};
+    payMap[p.memberCode][p.month] = (payMap[p.memberCode][p.month] || 0) + Number(p.amount);
+  });
+
+  // Monthly totals (org-wide) across all payment types
+  const monthlyFees = {}, monthlyDonations = {};
+  MONTHS.forEach(m => { monthlyFees[m] = 0; monthlyDonations[m] = 0; });
+  payments.forEach(p => {
+    if (p.type === "Membership Fee") monthlyFees[p.month] = (monthlyFees[p.month]||0) + Number(p.amount);
+    else if (p.type === "Donation") monthlyDonations[p.month] = (monthlyDonations[p.month]||0) + Number(p.amount);
+  });
+
+  const yearTotalFees = MONTHS.reduce((s,m)=>s+monthlyFees[m],0);
+  const yearTotalDonations = MONTHS.reduce((s,m)=>s+monthlyDonations[m],0);
+
+  const html = `
+<div class="page-hdr">
+  <div>
+    <div class="page-hdr-title">Year Tracker — ${ACTIVE_YEAR}</div>
+    <div class="page-hdr-sub">Jan–Dec payment grid across all active members</div>
+  </div>
+</div>
+
+<div class="coll-strip">
+  <div class="cs-item"><div class="cs-label">Total Fees ${ACTIVE_YEAR}</div><div class="cs-val ok">${fmt(yearTotalFees)}</div></div>
+  <div class="cs-item"><div class="cs-label">Total Donations</div><div class="cs-val acc">${fmt(yearTotalDonations)}</div></div>
+  <div class="cs-item"><div class="cs-label">Combined</div><div class="cs-val">${fmt(yearTotalFees+yearTotalDonations)}</div></div>
+  <div class="cs-item"><div class="cs-label">Active Members</div><div class="cs-val">${activeMembers.length}</div></div>
+</div>
+
+<div class="card" style="padding:0;overflow:hidden">
+  <div style="padding:14px 16px;background:var(--bg);font-size:13px;font-weight:700;color:var(--pri);border-bottom:1px solid var(--border-lt)">
+    📊 Per-Member Monthly Status
+  </div>
+  <div class="table-wrap" style="border:none;border-radius:0">
+    <table>
+      <tr>
+        <th>Code</th><th>Name</th>
+        ${MONTHS.map(m=>`<th style="text-align:center">${m.substring(0,3)}</th>`).join("")}
+        <th>Total Paid</th>
+      </tr>
+      ${activeMembers.map(m => {
+        const ji = MONTHS.indexOf(m.joinMonth);
+        const memPays = payMap[m.code] || {};
+        const totalPaid = Object.values(memPays).reduce((s,v)=>s+v,0);
+        return `<tr>
+          <td><strong>${esc(m.code)}</strong></td>
+          <td><a href="#" onclick="gsLoad('${esc(m.code)}');navigate('search');return false" style="color:var(--pri);text-decoration:none;font-weight:600">${esc(m.name)}</a></td>
+          ${MONTHS.map((mo,i)=>{
+            if (i < ji) return `<td style="text-align:center"><span class="pill pill-muted" style="font-size:10px">—</span></td>`;
+            const paid = memPays[mo] > 0;
+            return `<td style="text-align:center">${paid
+              ? `<span class="pill pill-ok" style="font-size:10px" title="${fmt(memPays[mo])}">✅</span>`
+              : `<span class="pill pill-danger" style="font-size:10px">❌</span>`}</td>`;
+          }).join("")}
+          <td><strong class="text-ok">${fmt(totalPaid)}</strong></td>
+        </tr>`;
+      }).join("")}
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="card-title-icon">📈</span>Monthly Totals — ${ACTIVE_YEAR}</div>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Month</th><th>Fees Collected</th><th>Donations</th><th>Combined</th></tr>
+      ${MONTHS.map(m => `
+      <tr>
+        <td><strong>${m}</strong></td>
+        <td>${fmt(monthlyFees[m])}</td>
+        <td>${fmt(monthlyDonations[m])}</td>
+        <td><span class="pill pill-pri">${fmt(monthlyFees[m]+monthlyDonations[m])}</span></td>
+      </tr>`).join("")}
+      <tr style="background:var(--bg)">
+        <td><strong>TOTAL</strong></td>
+        <td><strong>${fmt(yearTotalFees)}</strong></td>
+        <td><strong>${fmt(yearTotalDonations)}</strong></td>
+        <td><strong>${fmt(yearTotalFees+yearTotalDonations)}</strong></td>
+      </tr>
+    </table>
+  </div>
+</div>`;
+  setContent(html);
+}
+
 function greeting() {
   const h = new Date().getHours();
   if (h < 12) return "morning";
@@ -712,77 +814,69 @@ async function renderPayment() {
   </div>
 </div>
 
-<div style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:14px;align-items:start">
-  <div>
-    <div class="card">
-      <div class="card-title"><span class="card-title-icon">💳</span>New Payment</div>
-      <div class="form-group mb-12">
-        <label>Member <span class="req">*</span></label>
-        <div class="live-search-wrap">
-          <input id="ls-input" class="live-search-input" placeholder="Type name or code to search…"
-            oninput="lsFilter(this.value)" onfocus="lsShow()" autocomplete="off">
-          <div id="ls-dropdown" class="live-search-dropdown hidden"></div>
-        </div>
-        <input type="hidden" id="p-member-code">
-        <div id="selected-member-info" class="mt-8 hidden">
-          <div style="background:var(--pri-lt);border-radius:var(--r);padding:10px 13px;font-size:13px">
-            <strong id="sel-name"></strong>
-            <span class="text-muted" style="margin-left:6px" id="sel-meta"></span>
-          </div>
-        </div>
-      </div>
-      <div class="form-grid">
-        <div class="form-group">
-          <label>Date <span class="req">*</span></label>
-          <input id="p-date" type="date" class="hi" value="${todayISO()}">
-        </div>
-        <div class="form-group">
-          <label>Payment Type <span class="req">*</span></label>
-          <select id="p-type" onchange="handleTypeChange(this.value)">
-            <option value="Membership Fee">Membership Fee</option>
-            <option value="Donation">Donation</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Amount <span class="req">*</span></label>
-          <input id="p-amount" type="number" class="hi" placeholder="0" min="0" step="1">
-        </div>
-        <div class="form-group">
-          <label>Remarks</label>
-          <select id="p-remarks">
-            <option value="">— Select —</option>
-            <option>Monthly Fee</option>
-            <option>Advance Payment</option>
-            <option>Donation - General</option>
-            <option>Donation - Project</option>
-          </select>
-        </div>
-      </div>
-      <div class="flex gap-8 mt-16 items-center flex-wrap">
-        <button class="btn btn-acc" onclick="savePayment()" id="save-btn">💾 Save Payment</button>
-        <button class="btn btn-ghost" onclick="clearPayForm()">✕ Clear</button>
-        <span class="text-xs text-muted" style="margin-left:auto">🛡️ Duplicate check active</span>
-      </div>
+<div class="card">
+  <div class="card-title"><span class="card-title-icon">💳</span>New Payment</div>
+  <div class="form-group mb-12">
+    <label>Member <span class="req">*</span></label>
+    <div class="live-search-wrap">
+      <input id="ls-input" class="live-search-input" placeholder="Type name or code to search…"
+        oninput="lsFilter(this.value)" onfocus="lsShow()" autocomplete="off">
+      <div id="ls-dropdown" class="live-search-dropdown hidden"></div>
     </div>
-
-    <div class="card">
-      <div class="card-title"><span class="card-title-icon">⚡</span>Who Hasn't Paid This Month?</div>
-      <div id="unpaid-quick" class="page-loader"><div class="spinner spinner-dark"></div></div>
+    <input type="hidden" id="p-member-code">
+    <div id="selected-member-info" class="mt-8 hidden">
+      <div style="background:var(--pri-lt);border-radius:var(--r);padding:10px 13px;font-size:13px">
+        <strong id="sel-name"></strong>
+        <span class="text-muted" style="margin-left:6px" id="sel-meta"></span>
+      </div>
     </div>
   </div>
-
-  <div>
-    <div class="card">
-      <div class="card-title"><span class="card-title-icon">🕐</span>Recent Payments</div>
-      <div id="recent-list"><div class="page-loader"><div class="spinner spinner-dark"></div></div></div>
+  <div class="form-grid-3">
+    <div class="form-group">
+      <label>Date <span class="req">*</span></label>
+      <input id="p-date" type="date" class="hi" value="${todayISO()}">
+    </div>
+    <div class="form-group">
+      <label>Payment Type <span class="req">*</span></label>
+      <select id="p-type" onchange="handleTypeChange(this.value)">
+        <option value="Membership Fee">Membership Fee</option>
+        <option value="Donation">Donation</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Amount <span class="req">*</span></label>
+      <input id="p-amount" type="number" class="hi" placeholder="0" min="0" step="1">
+    </div>
+    <div class="form-group form-full">
+      <label>Remarks</label>
+      <select id="p-remarks">
+        <option value="">— Select —</option>
+        <option>Monthly Fee</option>
+        <option>Advance Payment</option>
+        <option>Donation - General</option>
+        <option>Donation - Project</option>
+      </select>
     </div>
   </div>
+  <div class="flex gap-8 mt-16 items-center flex-wrap">
+    <button class="btn btn-acc" onclick="savePayment()" id="save-btn">💾 Save Payment</button>
+    <button class="btn btn-ghost" onclick="clearPayForm()">✕ Clear</button>
+    <span class="text-xs text-muted" style="margin-left:auto">🛡️ Duplicate check active</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title" style="margin-bottom:12px"><span class="card-title-icon">🕐</span>All Payments</div>
+  <div class="search-bar" style="margin-bottom:12px">
+    <span class="search-icon">🔍</span>
+    <input id="pay-search" placeholder="Search by name, code, or receipt no…" oninput="filterPayments(this.value)">
+  </div>
+  <div id="recent-list"><div class="page-loader"><div class="spinner spinner-dark"></div></div></div>
 </div>`;
 
   setContent(html);
   document.addEventListener("click", lsOutsideClick);
   loadRecentPayments();
-  loadUnpaidQuick();
 }
 
 let lsMembers = [];
@@ -830,48 +924,39 @@ function handleTypeChange(type) {
   else remarks.value = "Monthly Fee";
 }
 
-async function loadUnpaidQuick() {
-  const el = document.getElementById("unpaid-quick");
-  if (!el) return;
-  const curMonth = MONTHS[new Date().getMonth()];
-  const res = await api("getMonthlyReport", { month: curMonth });
-  if (!res.ok || !el) { el && (el.innerHTML = ""); return; }
-  const unpaid = (res.unpaid || []).slice(0, 8);
-  if (!unpaid.length) {
-    el.innerHTML = `<div class="empty-state"><div class="empty-icon">🎉</div>
-      <div class="empty-text">All members paid for ${curMonth}!</div></div>`;
-    return;
-  }
-  el.innerHTML = `<div class="text-xs text-muted mb-8">Tap to pre-fill payment form</div>
-  ${unpaid.map(m => `
-  <div class="pay-item" style="cursor:pointer" onclick="prefillMember('${esc(m.code)}')">
-    <div class="pay-icon pi-fee">👤</div>
-    <div class="pay-info">
-      <div class="pay-receipt">${esc(m.name)}</div>
-      <div class="pay-detail">${esc(m.code)} · ${esc(m.city)}</div>
-    </div>
-    <span class="pill pill-danger text-xs">${fmt(m.pending)} due</span>
-  </div>`).join("")}
-  ${res.unpaid.length > 8 ? `<div class="text-xs text-muted text-center mt-8">+${res.unpaid.length-8} more — <a href="#" onclick="navigate('monthly');return false" style="color:var(--pri)">View all</a></div>` : ""}`;
-}
-
-function prefillMember(code) {
-  lsSelect(code);
-  window.scrollTo({top:0,behavior:"smooth"});
-}
+let allPaymentsCache = [];
+const PAY_LIST_CAP = 100;
 
 async function loadRecentPayments() {
   const el = document.getElementById("recent-list");
   if (!el) return;
   const res = await api("getPayments", {});
   if (!res.ok) { el.innerHTML = `<p class="text-danger text-sm">${esc(res.error)}</p>`; return; }
-  const recent = (res.payments || []).slice(0, 15);
-  if (!recent.length) {
-    el.innerHTML = `<div class="empty-state"><div class="empty-icon">💳</div><div class="empty-text">No payments yet</div></div>`;
+  allPaymentsCache = res.payments || [];
+  renderPaymentsList(allPaymentsCache);
+}
+
+function filterPayments(q) {
+  if (!q) { renderPaymentsList(allPaymentsCache); return; }
+  const ql = q.toLowerCase();
+  const filtered = allPaymentsCache.filter(p =>
+    (p.memberName||"").toLowerCase().includes(ql) ||
+    (p.memberCode||"").toLowerCase().includes(ql) ||
+    (p.receiptNo||"").toLowerCase().includes(ql)
+  );
+  renderPaymentsList(filtered, true);
+}
+
+function renderPaymentsList(list, isSearch=false) {
+  const el = document.getElementById("recent-list");
+  if (!el) return;
+  if (!list.length) {
+    el.innerHTML = `<div class="empty-state"><div class="empty-icon">💳</div><div class="empty-text">No payments found</div></div>`;
     return;
   }
-  const now = Date.now();
-  el.innerHTML = recent.map(p => {
+  const capped  = isSearch ? list : list.slice(0, PAY_LIST_CAP);
+  const now     = Date.now();
+  el.innerHTML = capped.map(p => {
     const isFee    = p.type === "Membership Fee";
     const editable = S.user.role === "admin" ||
       (["admin","pe"].includes(S.user.role) && (now - p.savedAt) < EDIT_WIN_MS);
@@ -891,7 +976,9 @@ async function loadRecentPayments() {
         <button class="btn btn-ghost btn-icon btn-sm" onclick="confirmDeletePayment('${esc(p.receiptNo)}')" title="Delete">🗑️</button>
       ` : ""}
     </div>`;
-  }).join("");
+  }).join("") + (!isSearch && list.length > PAY_LIST_CAP
+    ? `<div class="text-xs text-muted text-center mt-8">Showing latest ${PAY_LIST_CAP} of ${list.length} — use search to find older payments</div>`
+    : "");
 }
 
 async function savePayment() {
@@ -916,7 +1003,6 @@ async function savePayment() {
     toast("Payment saved — " + res.receiptNo, "ok");
     clearPayForm();
     loadRecentPayments();
-    loadUnpaidQuick();
     showReceiptModal(res, { memberCode, date, type, amount, remarks });
   } else {
     toast(res.error || "Error saving payment.", "err");
@@ -1535,41 +1621,22 @@ async function renderMonthly(month) {
   </div>
 </div>
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-  <div class="card" style="padding:0;overflow:hidden">
-    <div style="padding:14px 16px;background:var(--ok-lt);font-size:13px;font-weight:700;color:var(--ok)">
-      ✅ Paid — ${res.paid.length} member${res.paid.length!==1?"s":""}
-    </div>
-    ${res.paid.length===0
-      ? `<div class="empty-state"><div class="empty-text">No payments recorded for ${curMonth}</div></div>`
-      : `<div class="table-wrap" style="border:none;border-radius:0"><table>
-          <tr><th>Code</th><th>Name</th><th>City</th><th>Amount</th><th>Receipt</th></tr>
-          ${res.paid.map(p=>`<tr>
-            <td><strong>${esc(p.code)}</strong></td>
-            <td><a href="#" onclick="gsLoad('${esc(p.code)}');return false" style="color:var(--pri);text-decoration:none;font-weight:600">${esc(p.name)}</a></td>
-            <td>${esc(p.city)}</td>
-            <td><span class="pill pill-ok">${fmt(p.amount)}</span></td>
-            <td class="text-muted text-xs">${esc(p.receiptNo)}</td>
-          </tr>`).join("")}
-        </table></div>`}
+<div class="card" style="padding:0;overflow:hidden">
+  <div style="padding:14px 16px;background:var(--ok-lt);font-size:13px;font-weight:700;color:var(--ok)">
+    ✅ Paid — ${res.paid.length} member${res.paid.length!==1?"s":""} for ${curMonth}
   </div>
-  <div class="card" style="padding:0;overflow:hidden">
-    <div style="padding:14px 16px;background:var(--danger-lt);font-size:13px;font-weight:700;color:var(--danger)">
-      ❌ Unpaid — ${res.unpaid.length} member${res.unpaid.length!==1?"s":""}
-    </div>
-    ${res.unpaid.length===0
-      ? `<div class="empty-state" style="padding:24px"><div class="empty-icon">🎉</div><div class="empty-text">All members paid for ${curMonth}!</div></div>`
-      : `<div class="table-wrap" style="border:none;border-radius:0"><table>
-          <tr><th>Code</th><th>Name</th><th>City</th><th>Fee</th><th>Pending</th></tr>
-          ${res.unpaid.map(p=>`<tr>
-            <td><strong>${esc(p.code)}</strong></td>
-            <td><a href="#" onclick="gsLoad('${esc(p.code)}');return false" style="color:var(--pri);text-decoration:none;font-weight:600">${esc(p.name)}</a></td>
-            <td>${esc(p.city)}</td>
-            <td>${fmt(p.fee)}</td>
-            <td><span class="pill pill-danger">${fmt(p.pending)}</span></td>
-          </tr>`).join("")}
-        </table></div>`}
-  </div>
+  ${res.paid.length===0
+    ? `<div class="empty-state"><div class="empty-text">No payments recorded for ${curMonth}</div></div>`
+    : `<div class="table-wrap" style="border:none;border-radius:0"><table>
+        <tr><th>Code</th><th>Name</th><th>City</th><th>Amount</th><th>Receipt</th></tr>
+        ${res.paid.map(p=>`<tr>
+          <td><strong>${esc(p.code)}</strong></td>
+          <td><a href="#" onclick="gsLoad('${esc(p.code)}');return false" style="color:var(--pri);text-decoration:none;font-weight:600">${esc(p.name)}</a></td>
+          <td>${esc(p.city)}</td>
+          <td><span class="pill pill-ok">${fmt(p.amount)}</span></td>
+          <td class="text-muted text-xs">${esc(p.receiptNo)}</td>
+        </tr>`).join("")}
+      </table></div>`}
 </div>`;
   setContent(html);
 }
